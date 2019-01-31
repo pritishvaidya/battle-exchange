@@ -1,0 +1,56 @@
+{
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/standard"
+  ],
+  "plugins": [
+    "react",
+    "prettier",
+    "standard",
+    "graphql",
+    "react-hooks"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "localStorage": true,
+    "fetch": true,
+    "location": true,
+    "browser": true,
+    "document": true
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "warn",
+    "react-hooks/rules-of-hooks": "error"
+  },
+  "settings": {
+     "react": {
+       "version": "16.5.2"
+     }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      },
+      "plugins": ["jest"]
+    }
+  ]
+}
