@@ -1,2 +1,2 @@
 # battle-exchange
-A battle between stacks
+A battle in between Stack Exchange Sites
