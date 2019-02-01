@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 const sidebarWidth = 300
-const navbarHeight = 70
+const navbarHeight = 85
 
 const sizes = {
   giant: 1281,
@@ -20,4 +20,16 @@ const media = Object.keys(sizes).reduce((accumulator, label) => {
   return accumulator
 }, {})
 
-export { sidebarWidth, navbarHeight, media }
+const mobile = inner => css`
+  @media (max-width: ${1000 / 16}em) {
+    ${inner};
+  }
+`
+
+const phone = inner => css`
+  @media (max-width: ${650 / 16}em) {
+    ${inner};
+  }
+`
+
+export { sidebarWidth, navbarHeight, media, mobile, phone }
