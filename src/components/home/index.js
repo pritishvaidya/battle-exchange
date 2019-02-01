@@ -1,9 +1,16 @@
 import React from 'react'
 
-import { HomeWrapper } from './style'
+import BattleIllustration from './battle-illustration'
+
+import { HomeWrapper, BattleButton } from './style'
 
 function HomePage() {
-  return <HomeWrapper />
+  return (
+    <HomeWrapper>
+      <BattleIllustration />
+      <BattleButton>Start Battle</BattleButton>
+    </HomeWrapper>
+  )
 }
 
 export default HomePage

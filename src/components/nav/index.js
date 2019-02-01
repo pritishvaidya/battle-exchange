@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageType } from '../../pages'
 
-import { NavWrapper } from './style'
+import IconEmpty from './icon-empty'
+import IconFill from './icon-fill'
+import openLink from '../../utils/open-link'
+
+import { NavWrapper, StartWrapper, LogoLink } from './style'
 
 function Nav() {
-  return <NavWrapper />
+  const { pageType } = useContext(PageType)
+  return (
+    <NavWrapper>
+      <StartWrapper>
+        <LogoLink to={''} onClick={() => openLink('', '_self')}>
+          {pageType === 'Home' ? <IconEmpty /> : <IconFill />}
+          Battle Exchange
+        </LogoLink>
+      </StartWrapper>
+    </NavWrapper>
+  )
 }
 
 export default Nav
