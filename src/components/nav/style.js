@@ -14,7 +14,8 @@ const NavWrapper = styled.nav`
   height: ${rem(navbarHeight)};
   letter-spacing: ${rem(0.4)};
   font-family: 'Avenir', serif;
-  background: transparent;
+  background: ${props =>
+    props.transparent ? 'transparent' : props.theme.navbar};
   transition: background 300ms ease-out;
   color: ${props => props.theme.primary};
   padding: 0 5vw 0 2vw;
@@ -127,14 +128,15 @@ const NavSeparator = styled.span`
 `
 
 const NavLink = styled(Link)`
+  display: flex;
   flex: 0 0 auto;
-  display: inline-block;
-  line-height: ${props => (props.project ? rem(18) : rem(navbarHeight))};
+  align-items: center;
   transition: opacity 0.2s, transform 0.2s;
   cursor: pointer;
   letter-spacing: ${rem(0.4)};
   font-size: ${rem(16)};
-  color: ${props => (props.project ? props.theme.primary : props.theme.link)};
+  color: ${props => (props.link ? props.theme.primary : props.theme.link)};
+  text-decoration: none;
   &:hover,
   &:focus {
     opacity: 0.6;
