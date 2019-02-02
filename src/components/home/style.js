@@ -26,9 +26,8 @@ const BattleIllustrationIcon = styled.svg`
   width: ${rem(550)};
 `
 
-const BattleButton = styled.div`
+const BattleButton = styled.button`
   display: flex;
-  height: ${rem(50)};
   background-color: ${props => props.theme.link};
   letter-spacing: ${rem(0.4)};
   font-family: 'Avenir', serif;
@@ -36,7 +35,7 @@ const BattleButton = styled.div`
   font-size: ${rem(20)};
   font-weight: 500;
   align-items: center;
-  padding: ${rem(30)} ${rem(70)};
+  padding: ${rem(20)} ${rem(70)};
   border-radius: ${rem(50)};
   box-shadow: 0 ${rem(20)} ${rem(30)} rgba(37, 15, 138, 20%);
   transition: all 0.3s ease-in-out 0s;
