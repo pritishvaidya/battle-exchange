@@ -20,4 +20,8 @@ const StackExchange = {
   Sites: 'https://api.stackexchange.com/2.2/sites',
 }
 
-export { PageTypes, Routes, StackExchange }
+const CookieList = {
+  default: 'siteCookie',
+}
+
+export { PageTypes, Routes, CookieList, StackExchange }

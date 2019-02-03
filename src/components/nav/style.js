@@ -37,6 +37,19 @@ const StartWrapper = styled.div`
   font-weight: 600;
   font-size: ${rem(23)};
   letter-spacing: ${rem(0.4)};
+  transform-origin: center;
+  &:hover {
+    & .shield {
+      transform-origin: 42% 42%;
+      animation: rotate 2s ease-in-out forwards;
+    }
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `
 
 const MiddleWrapper = styled.div`

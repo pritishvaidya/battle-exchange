@@ -2,7 +2,7 @@ import React from 'react'
 
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
-import Sites from '../../components/battle/sites'
+import Players from '../../components/battle/players'
 import { PageType } from '../index'
 
 import { PageTypes } from '../../config'
@@ -15,7 +15,7 @@ function PlayersPage() {
           title="Players"
           keywords={[`players`, `battle`, `exchange`, `battle-exchange`]}
         />
-        <Sites />
+        <Players />
       </Layout>
     </PageType.Provider>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import { ToastContainer } from 'react-toastify'
+import { CookiesProvider } from 'react-cookie'
 import 'react-toastify/dist/ReactToastify.min.css'
 
 import Nav from './nav'
@@ -22,13 +23,15 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <ThemeProvider theme={Theme}>
-        <>
-          <Nav />
-          {children}
-          <ToastContainer />
-        </>
-      </ThemeProvider>
+      <CookiesProvider>
+        <ThemeProvider theme={Theme}>
+          <>
+            <Nav />
+            {children}
+            <ToastContainer />
+          </>
+        </ThemeProvider>
+      </CookiesProvider>
     )}
   />
 )

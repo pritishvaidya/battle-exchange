@@ -58,10 +58,12 @@ const Logo = styled.img`
 `
 const SearchBarWrapper = styled.div`
   display: flex;
-  margin: 10vh 25vw 10vh 25vw;
+  position: relative;
+  margin: ${props => (props.site ? `10vh 25vw 10vh 25vw` : `0 10vw 0 10vw`)};
   border-radius: ${rem(10)};
   border: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 ${rem(2)} ${rem(6)} rgba(0, 0, 0, 0.05);
+  ${props => props.site}
 `
 
 const SearchBarInput = styled.input`
@@ -70,11 +72,52 @@ const SearchBarInput = styled.input`
   box-sizing: border-box;
   margin: 0;
   width: 100%;
-  padding: 3vh 2vw 3vh 2vw;
+  min-width: 30vw;
+  padding: 3vh 5vw 3vh 2vw;
   font-size: ${rem(30)};
   font-family: Avenir, sans-serif;
   letter-spacing: ${rem(0.4)};
   color: ${props => props.theme.searchbarText};
+`
+
+const SearchIcon = styled.svg`
+  height: ${rem(40)};
+  width: ${rem(40)};
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+`
+
+const PlayersWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 15vh 2vw 0 2vw;
+  ${media.desktop`
+      padding: 0 15vw 5vh 15vw;
+  `} ${media.tablet`
+      padding: 0 10vw 5vh 10vw;
+    `} ${media.phone`
+      padding: 0 5vw 5vh 5vw;
+    `} ${media.smallPhone`
+      padding: 0 5vw 5vh 5vw;
+    `};
+`
+
+const PlayerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15vh 2vw 0 2vw;
+  ${media.desktop`
+      padding: 0 15vw 5vh 15vw;
+  `} ${media.tablet`
+      padding: 0 10vw 5vh 10vw;
+    `} ${media.phone`
+      padding: 0 5vw 5vh 5vw;
+    `} ${media.smallPhone`
+      padding: 0 5vw 5vh 5vw;
+    `};
 `
 
 export {
@@ -84,4 +127,7 @@ export {
   Logo,
   SearchBarWrapper,
   SearchBarInput,
+  SearchIcon,
+  PlayersWrapper,
+  PlayerWrapper,
 }
