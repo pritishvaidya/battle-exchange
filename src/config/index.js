@@ -17,7 +17,9 @@ const Routes = {
 }
 
 const StackExchange = {
+  Key: 'VLMSy2wUP9Vnp7RLa2NhUA((',
   Sites: 'https://api.stackexchange.com/2.2/sites',
+  User: 'https://api.stackexchange.com/2.2/users',
 }
 
 const CookieList = {

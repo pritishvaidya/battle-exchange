@@ -11,7 +11,7 @@ import { CookieList, Routes } from '../../config'
 
 function Players({ cookies }) {
   const siteCookie = cookies.get(CookieList.default)
-  const [setPlayer] = useState([{ player1: null, player2: null }])
+  const [player, setPlayer] = useState([{ player1: null, player2: null }])
 
   const submitPlayer = (player, data) => {
     return setPlayer([player], data)
@@ -22,15 +22,21 @@ function Players({ cookies }) {
   } else {
     return (
       <PlayersWrapper>
-        <Player
-          autoFocus
-          type={'player1'}
-          onSubmitPlayer={player => submitPlayer('player1', player)}
-        />
-        <Player
-          type={'player2'}
-          onSubmitPlayer={player => submitPlayer('player2', player)}
-        />
+        {player['player1'] ? null : (
+          <Player
+            autoFocus
+            type={'player1'}
+            cookie={siteCookie}
+            onSubmitPlayer={player => submitPlayer('player1', player)}
+          />
+        )}
+        {player['player1'] ? null : (
+          <Player
+            type={'player2'}
+            cookie={siteCookie}
+            onSubmitPlayer={player => submitPlayer('player2', player)}
+          />
+        )}
       </PlayersWrapper>
     )
   }
