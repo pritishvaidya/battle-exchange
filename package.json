@@ -20,6 +20,7 @@
     "gatsby-transformer-sharp": "^2.1.13",
     "polished": "^2.3.3",
     "prop-types": "^15.6.2",
+    "query-string": "^6.2.0",
     "react": "^16.8.0-alpha.1",
     "react-cookie": "^3.0.8",
     "react-dom": "^16.8.0-alpha.1",
