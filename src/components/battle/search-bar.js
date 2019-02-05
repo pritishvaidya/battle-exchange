@@ -7,7 +7,6 @@ import IconSearch from './icon-search'
 function SearchBar({
   autoFocus,
   onFocus,
-  onBlur,
   placeholder,
   onChange,
   onSubmit,
@@ -34,7 +33,6 @@ function SearchBar({
         autoCorrect="off"
         autoFocus={autoFocus}
         onFocus={onFocus}
-        onBlur={onBlur}
         spellcheck="false"
         autocomplete="off"
         site={site}
@@ -48,7 +46,6 @@ SearchBar.defaultProps = {
   autoFocus: false,
   placeholder: 'Enter the site name...',
   onFocus: () => {},
-  onBlur: () => {},
   onSubmit: () => {},
   open: false,
 }
@@ -56,11 +53,10 @@ SearchBar.defaultProps = {
 SearchBar.propTypes = {
   autoFocus: PropTypes.bool,
   onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
-  site: PropTypes.string,
+  site: PropTypes.bool,
   open: PropTypes.bool,
 }
 export default SearchBar

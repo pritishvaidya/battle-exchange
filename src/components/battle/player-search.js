@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -11,11 +11,12 @@ import { StackExchange } from '../../config'
 import FetchList from '../../utils/fetch-list'
 import SiteList from '../../utils/site-list'
 
-function Player({ onSubmitPlayer, autoFocus, type, cookie }) {
+function PlayerSearch({ onSubmitPlayer, autoFocus, type, cookie }) {
+  const wrapperRef = useRef(null)
   const [list, updateList] = useState([])
   const [loading, setLoading] = useState(false)
   const [focused, setFocus] = useState(autoFocus)
-  const [searchString, setSearchString] = useState('Pri')
+  const [searchString, setSearchString] = useState(null)
   const currentSite = SiteList.filter(
     ({ api_site_parameter }) => api_site_parameter === cookie
   )
@@ -29,8 +30,10 @@ function Player({ onSubmitPlayer, autoFocus, type, cookie }) {
       site: cookie,
       key: StackExchange.Key,
     })
+    if (list) {
+      updateList(list)
+    }
     setSearchString(name)
-    updateList(list)
     setLoading(false)
   }
 
@@ -45,14 +48,27 @@ function Player({ onSubmitPlayer, autoFocus, type, cookie }) {
 
   const onSubmit = name => fetchList(name)
   const onFocus = () => setFocus(true)
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside, false)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside, false)
+    }
+  }, [])
+
+  const handleClickOutside = event => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      onBlur()
+    }
+  }
+
   const onBlur = () => setFocus(false)
 
   return (
-    <PlayerWrapper>
+    <PlayerWrapper ref={wrapperRef}>
       <SearchBar
         onChange={onChange}
         onFocus={onFocus}
-        onBlur={onBlur}
         onSubmit={onSubmit}
         autoFocus={autoFocus}
         placeholder={`Enter the ${_.startCase(_.toLower(type))} name...`}
@@ -64,16 +80,17 @@ function Player({ onSubmitPlayer, autoFocus, type, cookie }) {
         data={list}
         focused={focused}
         site={currentSite.length && currentSite[0]}
+        submit={onSubmitPlayer}
       />
     </PlayerWrapper>
   )
 }
 
-Player.propTypes = {
+PlayerSearch.propTypes = {
   onSubmitPlayer: PropTypes.func.isRequired,
   autoFocus: PropTypes.bool,
   type: PropTypes.string,
   cookie: PropTypes.string.isRequired,
 }
 
-export default Player
+export default PlayerSearch

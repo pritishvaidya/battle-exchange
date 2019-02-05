@@ -16,6 +16,7 @@ import SearchLoader from './search-loader'
 import formatReputation from '../../utils/format-reputation'
 
 function SearchResults({
+  submit,
   searchString,
   loading,
   data,
@@ -35,7 +36,8 @@ function SearchResults({
     } else if (data.length) {
       return (
         <SearchResultsWrapper>
-          {data.map(({ profile_image, display_name, reputation }) => {
+          {data.map(player => {
+            const { display_name, profile_image, reputation } = player
             const parts = display_name.split(regex)
             for (let i = 1; i < parts.length; i += 2) {
               parts[i] = (
@@ -46,7 +48,7 @@ function SearchResults({
               )
             }
             return (
-              <Result key={profile_image}>
+              <Result key={profile_image} onClick={() => submit(player)}>
                 <ProfileWrapper>
                   <ProfileImage src={profile_image} />
                   {parts}
@@ -74,6 +76,7 @@ SearchResults.defaultProps = {
 }
 
 SearchResults.propTypes = {
+  submit: PropTypes.func.isRequired,
   searchString: PropTypes.string.isRequired,
   loading: PropTypes.bool,
   data: PropTypes.array.isRequired,

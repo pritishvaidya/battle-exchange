@@ -26,4 +26,87 @@ const CookieList = {
   default: 'siteCookie',
 }
 
-export { PageTypes, Routes, CookieList, StackExchange }
+const Graph = {
+  chart: {
+    renderTo: 'reputation-graph',
+    defaultSeriesType: 'line',
+    zoomType: 'xy',
+    backgroundColor: '#FFFFFF',
+    spacingBottom: 20,
+    spacingTop: 20,
+    spacingLeft: 10,
+    spacingRight: 10,
+
+    // Explicitly tell the width and height of a chart
+    width: window.innerWidth / 3,
+    height: window.innerHeight / 2.5,
+  },
+  credits: {
+    enabled: false,
+  },
+  title: {
+    text: null,
+  },
+  xAxis: {
+    type: 'datetime',
+    maxZoom: 14 * 24 * 3600000, // fourteen days
+    title: {
+      text: null,
+    },
+    labels: {
+      style: {
+        'font-family': "'Avenir,sans-serif;",
+      },
+    },
+  },
+  yAxis: {
+    title: {
+      text: null,
+    },
+    labels: {
+      style: {
+        'font-family': "'Avenir,sans-serif;",
+      },
+    },
+    min: 0.6,
+    startOnTick: false,
+  },
+  tooltip: {
+    shared: true,
+  },
+  plotOptions: {
+    line: {
+      lineWidth: 2,
+      marker: {
+        enabled: false,
+        states: {
+          hover: {
+            enabled: true,
+            radius: 5,
+          },
+        },
+      },
+      shadow: false,
+      states: {
+        hover: {
+          lineWidth: 3,
+        },
+      },
+    },
+    series: {
+      animation: true,
+    },
+  },
+  series: [],
+  responsive: {
+    rules: [
+      {
+        condition: {
+          maxWidth: 400,
+        },
+      },
+    ],
+  },
+}
+
+export { PageTypes, Routes, CookieList, StackExchange, Graph }

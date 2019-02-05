@@ -6,6 +6,23 @@ const Shadow = '#deddfd'
 const Link = '#FFFFFF'
 const SearchBar = '#D3D3D3'
 const SearchBarText = '#9aa1aa'
+const Badges = {
+  gold: {
+    background: '#fffae6',
+    border: '#ece5c6',
+    dot: '#ffcb02',
+  },
+  silver: {
+    background: '#eaebec',
+    border: '#dddee0',
+    dot: '#b4b8bb',
+  },
+  bronze: {
+    background: '#f8e9dd',
+    border: '#f0decb',
+    dot: '#d1a684',
+  },
+}
 
 const Theme = {
   navbar: Navbar,
@@ -16,6 +33,7 @@ const Theme = {
   link: Link,
   searchbar: SearchBar,
   searchbarText: SearchBarText,
+  badges: Badges,
 }
 
 export {
@@ -27,5 +45,6 @@ export {
   Link,
   SearchBar,
   SearchBarText,
+  Badges,
   Theme,
 }

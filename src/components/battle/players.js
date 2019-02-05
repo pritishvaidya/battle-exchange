@@ -3,7 +3,8 @@ import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 import { Redirect } from '@reach/router'
 
-import Player from './player'
+import PlayerSearch from './player-search'
+import PlayerInfo from './player-info'
 
 import { PlayersWrapper } from './style'
 
@@ -11,10 +12,10 @@ import { CookieList, Routes } from '../../config'
 
 function Players({ cookies }) {
   const siteCookie = cookies.get(CookieList.default)
-  const [player, setPlayer] = useState([{ player1: null, player2: null }])
+  const [player, setPlayer] = useState({ player1: null, player2: null })
 
-  const submitPlayer = (player, data) => {
-    return setPlayer([player], data)
+  const submitPlayer = (playerStatus, data) => {
+    setPlayer({ ...player, [playerStatus]: data })
   }
 
   if (!siteCookie) {
@@ -22,16 +23,20 @@ function Players({ cookies }) {
   } else {
     return (
       <PlayersWrapper>
-        {player['player1'] ? null : (
-          <Player
+        {player['player1'] ? (
+          <PlayerInfo cookie={siteCookie} data={player['player1']} />
+        ) : (
+          <PlayerSearch
             autoFocus
             type={'player1'}
             cookie={siteCookie}
             onSubmitPlayer={player => submitPlayer('player1', player)}
           />
         )}
-        {player['player1'] ? null : (
-          <Player
+        {player['player2'] ? (
+          <PlayerInfo cookie={siteCookie} data={player['player2']} />
+        ) : (
+          <PlayerSearch
             type={'player2'}
             cookie={siteCookie}
             onSubmitPlayer={player => submitPlayer('player2', player)}

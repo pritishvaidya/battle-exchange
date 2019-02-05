@@ -60,7 +60,7 @@ const Logo = styled.img`
 const SearchBarWrapper = styled.div`
   display: flex;
   position: relative;
-  margin: ${props => (props.site ? `10vh 25vw 10vh 25vw` : `0 10vw 0 10vw`)};
+  margin: ${props => (props.site ? `10vh 25vw 10vh 25vw` : `0 0 0 0`)};
   border-radius: ${props =>
     props.open ? `${rem(10)} ${rem(10)} 0 0` : rem(10)};
   border: 1px solid rgba(0, 0, 0, 0.07);
@@ -124,13 +124,15 @@ const LoaderIcon = styled.svg`
   }
 `
 
-const Result = styled.div`
+const Result = styled.button`
   display: flex;
+  flex-wrap: wrap;
   padding: 3vh 2vw 3vh 2vw;
   width: 100%;
   min-width: 30vw;
   cursor: pointer;
   align-items: center;
+  border: 0;
   justify-content: ${props => (props.center ? `center` : 'space-between')};
   border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
   &:hover,
@@ -166,9 +168,10 @@ const PlayersWrapper = styled.div`
 
 const PlayerWrapper = styled.div`
   display: flex;
+  width: 50vw;
   align-items: center;
   flex-direction: column;
-  padding: 15vh 2vw 0 2vw;
+  padding: ${props => (props.info ? '5vh 2vw 0 2vw' : '15vh 2vw 0 2vw')};
   ${media.desktop`
       padding: 0 15vw 5vh 15vw;
   `} ${media.tablet`
@@ -182,14 +185,22 @@ const PlayerWrapper = styled.div`
 
 const ProfileWrapper = styled.div`
   display: flex;
+  flex-direction: ${props => (props.info ? 'column' : 'row')};
   align-items: center;
 `
 
 const ProfileImage = styled.img`
-  height: ${rem(50)};
-  width: ${rem(50)};
-  border-radius: ${rem(25)};
-  margin-right: ${rem(20)};
+  height: ${props => (props.big ? rem(80) : rem(50))};
+  width: ${props => (props.big ? rem(80) : rem(50))};
+  border-radius: ${props => (props.big ? rem(40) : rem(25))};
+  margin-right: ${props => (props.big ? 0 : rem(20))};
+`
+
+const ProfileName = styled.div`
+  margin-top: 3vh;
+  font-size: ${rem(30)};
+  font-weight: 500;
+  font-family: Avenir, sans-serif;
 `
 
 const SiteLogo = styled.img`
@@ -201,6 +212,51 @@ const ReputationWrapper = styled.div`
   display: flex;
   align-items: center;
   color: ${props => props.theme.searchbarText};
+  margin-top: ${props => (props.info ? '1vh' : '0')};
+`
+
+const BadgeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 1vh;
+`
+
+const Badge = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0.2vw 0 0.2vw;
+  padding: 0.5vh 1vw 0.5vh 0.5vw;
+  background-color: ${props => props.background};
+  border: 1px solid ${props => props.border};
+  border-radius: ${rem(2)};
+  font-weight: bold;
+  font-size: ${rem(14)};
+`
+const BadgeDot = styled.span`
+  margin: 0 0.5vw 0 0.5vw;
+  width: ${rem(6)};
+  height: ${rem(6)};
+  border-radius: ${rem(3)};
+  background-color: ${props => props.color};
+`
+
+const ChartWrapper = styled.div`
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vh;
+`
+
+const EmptyGraph = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `
 
 export {
@@ -217,8 +273,14 @@ export {
   ResultText,
   ProfileWrapper,
   ProfileImage,
+  ProfileName,
   PlayersWrapper,
   PlayerWrapper,
   SiteLogo,
   ReputationWrapper,
+  BadgeWrapper,
+  Badge,
+  BadgeDot,
+  ChartWrapper,
+  EmptyGraph,
 }
