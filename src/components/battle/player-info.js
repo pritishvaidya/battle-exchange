@@ -81,7 +81,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
         {formatReputation(reputation)}
       </ReputationWrapper>
       <BadgeWrapper>
-        {gold && (
+        {!!gold && (
           <Badge
             background={Badges.gold.background}
             border={Badges.gold.border}
@@ -90,7 +90,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
             {gold}
           </Badge>
         )}
-        {silver && (
+        {!!silver && (
           <Badge
             background={Badges.silver.background}
             border={Badges.silver.border}
@@ -99,7 +99,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
             {silver}
           </Badge>
         )}
-        {bronze && (
+        {!!bronze && (
           <Badge
             background={Badges.bronze.background}
             border={Badges.bronze.border}
