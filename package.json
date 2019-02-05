@@ -24,6 +24,7 @@
     "query-string": "^6.2.0",
     "react": "^16.8.0-alpha.1",
     "react-cookie": "^3.0.8",
+    "react-countup": "^4.0.0",
     "react-dom": "^16.8.0-alpha.1",
     "react-helmet": "^5.2.0",
     "react-highcharts": "^16.0.2",

@@ -26,12 +26,22 @@ const BattleIllustrationIcon = styled.svg`
   width: ${rem(550)};
 `
 
+const ButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 5vh;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`
+
 const BattleButton = styled.button`
   display: flex;
-  background-color: ${props => props.theme.link};
+  background-color: ${props =>
+    props.player ? props.theme.primary : props.theme.link};
   letter-spacing: ${rem(0.4)};
   font-family: 'Avenir', serif;
-  color: ${props => props.theme.primary};
+  color: ${props => (props.player ? props.theme.link : props.theme.primary)};
   font-size: ${rem(20)};
   font-weight: 500;
   align-items: center;
@@ -52,4 +62,4 @@ const BattleButton = styled.button`
   }
 `
 
-export { HomeWrapper, BattleIllustrationIcon, BattleButton }
+export { HomeWrapper, BattleIllustrationIcon, ButtonWrapper, BattleButton }

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactHighcharts from 'react-highcharts'
 import PropTypes from 'prop-types'
 
@@ -34,8 +34,8 @@ const PlayerInfo = React.memo(function PlayerInfo({
     reputation,
     account_id,
   },
+  onSubmitGraph,
 }) {
-  const chartsRef = useRef(null)
   const currentSite = SiteList.filter(
     ({ api_site_parameter }) => api_site_parameter === cookie
   )
@@ -50,6 +50,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
     const graphData = await FetchGraphData(id, name)
     if (graphData) {
       setGraphData(graphData)
+      onSubmitGraph(graphData)
     }
     setLoading(false)
   }
@@ -111,7 +112,6 @@ const PlayerInfo = React.memo(function PlayerInfo({
       </BadgeWrapper>
       <ChartWrapper>
         <ReactHighcharts
-          ref={chartsRef}
           config={{
             ...Graph,
             chart: { ...Graph.chart, flex: 1 },
@@ -132,6 +132,7 @@ PlayerInfo.propTypes = {
   clear: PropTypes.func.isRequired,
   cookie: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
+  onSubmitGraph: PropTypes.func.isRequired,
 }
 
 export default PlayerInfo

@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 import { Redirect } from '@reach/router'
+import { navigate } from 'gatsby'
 
 import PlayerSearch from './player-search'
 import PlayerInfo from './player-info'
 
 import { PlayersWrapper } from './style'
+import { BattleButton, ButtonWrapper } from '../home/style'
 
 import { CookieList, Routes } from '../../config'
 
@@ -16,6 +18,16 @@ function Players({ cookies }) {
 
   const submitPlayer = (playerStatus, data) => {
     setPlayer({ ...player, [playerStatus]: data })
+  }
+
+  const submitGraph = (playerStatus, data) => {
+    setPlayer({
+      ...player,
+      [playerStatus]: {
+        ...player[playerStatus],
+        reputationGraphData: playerStatus,
+      },
+    })
   }
 
   const clear = playerStatus => {
@@ -32,6 +44,7 @@ function Players({ cookies }) {
             clear={() => clear('player1')}
             cookie={siteCookie}
             data={player['player1']}
+            onSubmitGraph={data => submitGraph('player1', data)}
           />
         ) : (
           <PlayerSearch
@@ -46,6 +59,7 @@ function Players({ cookies }) {
             clear={() => clear('player2')}
             cookie={siteCookie}
             data={player['player2']}
+            onSubmitGraph={data => submitGraph('player2', data)}
           />
         ) : (
           <PlayerSearch
@@ -53,6 +67,18 @@ function Players({ cookies }) {
             cookie={siteCookie}
             onSubmitPlayer={player => submitPlayer('player2', player)}
           />
+        )}
+        {player['player1'] && player['player2'] && (
+          <ButtonWrapper>
+            <BattleButton
+              player
+              onClick={() =>
+                navigate(Routes.Battle.results, { state: { player } })
+              }
+            >
+              Start Battle
+            </BattleButton>
+          </ButtonWrapper>
         )}
       </PlayersWrapper>
     )

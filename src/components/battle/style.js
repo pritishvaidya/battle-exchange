@@ -154,7 +154,7 @@ const ResultText = styled.span`
 const PlayersWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10vh 2vw 0 2vw;
+  padding: 10vh 0 0 0;
   ${media.desktop`
       padding: 0 15vw 5vh 15vw;
   `} ${media.tablet`
@@ -246,7 +246,7 @@ const ChartWrapper = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  margin-top: 2vh;
+  margin-top: ${props => (props.result ? '10vh' : '2vh')};
 `
 
 const EmptyGraph = styled.div`
@@ -280,6 +280,64 @@ const CloseWrapper = styled.button`
   }
 `
 
+const ResultsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  ${media.desktop`
+      padding: 0 15vw 5vh 15vw;
+  `} ${media.tablet`
+      padding: 0 10vw 5vh 10vw;
+    `} ${media.phone`
+      padding: 0 5vw 5vh 5vw;
+    `} ${media.smallPhone`
+      padding: 0 5vw 5vh 5vw;
+    `};
+`
+
+const MultiplierWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 5vh 10vw 0 15vw;
+  width: 100%;
+`
+
+const Title = styled.div`
+  padding: 3vh 0 1vh 0;
+  letter-spacing: ${rem(0.4)};
+  font-family: 'Avenir', serif;
+  color: ${props => props.color};
+  font-size: ${rem(22)};
+  font-weight: 600;
+`
+
+const FieldWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  letter-spacing: ${rem(0.4)};
+  font-family: 'Avenir', serif;
+  color: ${props => props.color};
+  font-size: ${rem(20)};
+`
+
+const Name = styled.span`
+  font-weight: 600;
+`
+
+const Value = styled.span`
+  font-weight: normal;
+  padding-left: ${rem(10)};
+  color: ${props => props.theme.searchbarText};
+`
+
+const Total = styled.div`
+  padding-top: 5vh;
+  font-weight: bold;
+  font-size: ${rem(35)};
+`
+
 export {
   SiteWrapper,
   SiteListWrapper,
@@ -305,4 +363,11 @@ export {
   ChartWrapper,
   EmptyGraph,
   CloseWrapper,
+  ResultsWrapper,
+  MultiplierWrapper,
+  Title,
+  FieldWrapper,
+  Name,
+  Value,
+  Total,
 }

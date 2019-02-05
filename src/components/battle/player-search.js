@@ -16,7 +16,7 @@ function PlayerSearch({ onSubmitPlayer, autoFocus, type, cookie }) {
   const [list, updateList] = useState([])
   const [loading, setLoading] = useState(false)
   const [focused, setFocus] = useState(autoFocus)
-  const [searchString, setSearchString] = useState(null)
+  const [searchString, setSearchString] = useState('')
   const currentSite = SiteList.filter(
     ({ api_site_parameter }) => api_site_parameter === cookie
   )
