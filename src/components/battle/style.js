@@ -167,6 +167,7 @@ const PlayersWrapper = styled.div`
 `
 
 const PlayerWrapper = styled.div`
+  position: relative;
   display: flex;
   width: 50vw;
   align-items: center;
@@ -259,6 +260,26 @@ const EmptyGraph = styled.div`
   bottom: 0;
 `
 
+const CloseWrapper = styled.button`
+  position: absolute;
+  top: 0;
+  right: 5vw;
+  font-weight: bold;
+  font-size: ${rem(14)};
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+  color: ${props => props.theme.primary};
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+`
+
 export {
   SiteWrapper,
   SiteListWrapper,
@@ -283,4 +304,5 @@ export {
   BadgeDot,
   ChartWrapper,
   EmptyGraph,
+  CloseWrapper,
 }

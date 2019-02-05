@@ -18,13 +18,21 @@ function Players({ cookies }) {
     setPlayer({ ...player, [playerStatus]: data })
   }
 
+  const clear = playerStatus => {
+    setPlayer({ ...player, [playerStatus]: null })
+  }
+
   if (!siteCookie) {
     return <Redirect to={Routes.Battle.site} noThrow />
   } else {
     return (
       <PlayersWrapper>
         {player['player1'] ? (
-          <PlayerInfo cookie={siteCookie} data={player['player1']} />
+          <PlayerInfo
+            clear={() => clear('player1')}
+            cookie={siteCookie}
+            data={player['player1']}
+          />
         ) : (
           <PlayerSearch
             autoFocus
@@ -34,7 +42,11 @@ function Players({ cookies }) {
           />
         )}
         {player['player2'] ? (
-          <PlayerInfo cookie={siteCookie} data={player['player2']} />
+          <PlayerInfo
+            clear={() => clear('player2')}
+            cookie={siteCookie}
+            data={player['player2']}
+          />
         ) : (
           <PlayerSearch
             type={'player2'}

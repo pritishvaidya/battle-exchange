@@ -14,6 +14,7 @@ import {
   BadgeDot,
   ChartWrapper,
   EmptyGraph,
+  CloseWrapper,
 } from './style'
 import formatReputation from '../../utils/format-reputation'
 import SiteList from '../../utils/site-list'
@@ -23,7 +24,8 @@ import { Graph } from '../../config'
 
 import { Badges } from '../../theme'
 
-function PlayerInfo({
+const PlayerInfo = React.memo(function PlayerInfo({
+  clear,
   cookie,
   data: {
     badge_counts: { bronze, silver, gold },
@@ -62,6 +64,7 @@ function PlayerInfo({
 
   return (
     <PlayerWrapper info>
+      <CloseWrapper onClick={clear}>Clear</CloseWrapper>
       <ProfileWrapper info>
         <ProfileImage src={profile_image} big />
         <ProfileName>{display_name}</ProfileName>
@@ -123,9 +126,10 @@ function PlayerInfo({
       </ChartWrapper>
     </PlayerWrapper>
   )
-}
+})
 
 PlayerInfo.propTypes = {
+  clear: PropTypes.func.isRequired,
   cookie: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
 }
