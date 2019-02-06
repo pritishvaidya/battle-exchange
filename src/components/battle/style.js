@@ -6,15 +6,6 @@ const SiteWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15vh 2vw 0 2vw;
-  ${media.desktop`
-      padding: 0 15vw 5vh 15vw;
-  `} ${media.tablet`
-    padding: 0 10vw 5vh 10vw;
-  `} ${media.phone`
-    padding: 0 5vw 5vh 5vw;
-  `} ${media.smallPhone`
-    padding: 0 5vw 5vh 5vw;
-  `};
 `
 
 const SiteListWrapper = styled.div`
@@ -22,6 +13,10 @@ const SiteListWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
+  ${media.smallPhone`
+   justify-content: center;
+    align-content: center;
+  `};
 `
 
 const Site = styled.button`
@@ -51,7 +46,22 @@ const Site = styled.button`
     opacity: 0.8;
     box-shadow: rgba(37, 15, 138, 20%) 0 ${rem(5)} ${rem(30)} 0;
   }
-`
+  ${media.desktop`
+    margin: ${rem(10)} ${rem(10)};
+    padding: ${rem(15)} ${rem(40)};
+  `}
+  ${media.tablet`
+    margin: ${rem(10)} ${rem(10)};
+    padding: ${rem(15)} ${rem(40)};
+  `} ${media.phone`
+    margin: ${rem(5)} ${rem(3)};
+    padding: ${rem(15)} ${rem(30)};
+   `}
+  ${media.smallPhone`
+    margin: ${rem(5)} ${rem(3)};
+    padding: ${rem(15)} ${rem(40)};
+  `};
+ `
 
 const Logo = styled.img`
   height: ${rem(100)};
@@ -65,7 +75,16 @@ const SearchBarWrapper = styled.div`
     props.open ? `${rem(10)} ${rem(10)} 0 0` : rem(10)};
   border: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 ${rem(2)} ${rem(6)} rgba(0, 0, 0, 0.05);
-`
+  ${media.desktop`
+    margin: ${props => (props.site ? `0 15vw 5vh 15vw` : `0 0 0 0`)};
+    `} ${media.tablet`
+    margin: ${props => (props.site ? `0 15vw 5vh 15vw` : `0 0 0 0`)};
+  `} ${media.phone`
+    margin: ${props => (props.site ? `0 5vw 5vh 5vw` : `0 0 0 0`)};
+  `} ${media.smallPhone`
+    margin: ${props => (props.site ? `5vh 5vw 5vh 5vw` : `0 0 0 0`)};
+  `};
+ `
 
 const SearchBarInput = styled.input`
   border: 0;
@@ -79,7 +98,17 @@ const SearchBarInput = styled.input`
   font-family: Avenir, sans-serif;
   letter-spacing: ${rem(0.4)};
   color: ${props => props.theme.searchbarText};
-`
+  ${media.desktop`
+    padding: 2vh 3vw 2vh 3vw;
+  `} ${media.tablet`
+    padding: 2vh 3vw 2vh 3vw;
+  `} ${media.phone`
+    padding: 3vh 5vw 3vh 2vw;
+    font-size: ${rem(25)};
+  `} ${media.smallPhone`
+    padding: 3vh 5vw 3vh 2vw;
+  `};
+ `
 
 const SearchIcon = styled.svg`
   height: ${rem(40)};
