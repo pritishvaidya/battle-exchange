@@ -62,7 +62,6 @@ const PlayerInfo = React.memo(function PlayerInfo({
 
   return (
     <PlayerWrapper info>
-      <CloseWrapper onClick={clear}>Clear</CloseWrapper>
       <ProfileWrapper info>
         <ProfileImage src={profile_image} big />
         <ProfileName>{display_name}</ProfileName>
@@ -93,6 +92,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
             <EmptyGraph>No Data to Display</EmptyGraph>
           )}
       </ChartWrapper>
+      <CloseWrapper onClick={clear}>Clear</CloseWrapper>
     </PlayerWrapper>
   )
 })

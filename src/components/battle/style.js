@@ -140,6 +140,15 @@ const SearchResultsWrapper = styled.div`
   overflow: hidden;
   max-height: 50vh;
   overflow-y: scroll;
+  ${media.desktop`
+     width: 40vw;
+`} ${media.tablet`
+     width: 50vw;
+  `} ${media.phone`
+      width: 90vw;
+  `} ${media.smallPhone`
+      width: 90vw;
+  `};
 `
 
 const LoaderIcon = styled.svg`
@@ -167,6 +176,7 @@ const Result = styled.button`
   cursor: pointer;
   align-items: center;
   border: 0;
+  background-color: #ffffff;
   justify-content: ${props => (props.center ? `center` : 'space-between')};
   border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
   &:hover,
@@ -183,6 +193,11 @@ const ResultText = styled.span`
   font-family: Avenir, sans-serif;
   letter-spacing: ${rem(0.4)};
   color: ${props => (props.active ? 'black' : props.theme.searchbarText)};
+  ${media.phone`
+    letter-spacing: ${rem(1.4)};
+  `} ${media.smallPhone`
+    letter-spacing: ${rem(1.4)};
+  `};
 `
 
 const PlayersWrapper = styled.div`
@@ -210,17 +225,17 @@ const PlayerWrapper = styled.div`
   flex-direction: column;
   padding-top: 3vh;
   margin: ${props => (props.info ? '2vh 5vw 0 5vw' : '15vh 2vw 0 2vw')};
-  box-shadow: ${props =>
-    props.info ? `0 ${rem(2)} ${rem(6)} rgba(37, 15, 138, 20%)` : 'none'};
   background-color: ${props => (props.end ? '#66ee78' : '#FFFFFF')};
   ${media.desktop`
-      padding: 0 15vw 0 15vw;
+      width: 40vw;
+      padding: ${props => (props.info ? '10vh 0 0 0' : '0 15vw 0 15vw')};
   `} ${media.tablet`
-      padding: 0 10vw 0 10vw;
+      width: 90vw;
+      padding: ${props => (props.info ? '10vh 0 10vh 0' : '0 10vw 0 10vw')};
     `} ${media.phone`
-      padding: 0 5vw 0 5vw;
+      padding: ${props => (props.info ? '10vh 0 10vh 0' : '0 5vw 0 5vw')};
     `} ${media.smallPhone`
-      padding: 0 5vw 0 5vw;
+      padding: ${props => (props.info ? '10vh 0 10vh 0' : '0 5vw 0 5vw')};
     `};
 `
 
@@ -272,7 +287,15 @@ const Badge = styled.div`
   border-radius: ${rem(2)};
   font-weight: bold;
   font-size: ${rem(14)};
+  ${media.phone`
+    margin: 0 0.5vw 0 0.5vw;
+    padding: 0.5vh 3vw 0.5vh 3vw;
+`} ${media.smallPhone`
+    margin: 0 0.5vw 0 0.5vw;
+    padding: 0.5vh 3vw 0.5vh 3vw;
+   `};
 `
+
 const BadgeDot = styled.span`
   margin: 0 0.5vw 0 0.5vw;
   width: ${rem(6)};
@@ -304,23 +327,42 @@ const EmptyGraph = styled.div`
 `
 
 const CloseWrapper = styled.button`
-  position: absolute;
-  top: 2vh;
-  right: 1vw;
-  font-weight: bold;
+  display: flex;
+  background-color: ${props => props.theme.primary};
+  letter-spacing: ${rem(0.4)};
+  font-family: 'Avenir', serif;
+  color: ${props => props.theme.link};
   font-size: ${rem(16)};
-  margin: 0;
-  border: 0;
+  font-weight: 500;
+  align-items: center;
+  padding: ${rem(10)} ${rem(30)};
+  border-radius: ${rem(50)};
+  box-shadow: 0 ${rem(5)} ${rem(10)} rgba(37, 15, 138, 10%);
+  transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
-  color: ${props => props.theme.primary};
   &:hover,
   &:focus {
-    opacity: 0.8;
+    opacity: 0.9;
+    box-shadow: rgba(37, 15, 138, 10%) 0 ${rem(5)} ${rem(10)} 0;
   }
   &:active {
     transform: scale(0.98);
     opacity: 0.8;
+    box-shadow: rgba(37, 15, 138, 21%) 0 ${rem(1)} ${rem(10)} 0;
   }
+  ${media.desktop`
+    padding: ${rem(15)} ${rem(40)};
+    font-size: ${rem(24)};
+  `} ${media.tablet`
+    padding: ${rem(15)} ${rem(40)};
+    font-size: ${rem(24)};
+  `} ${media.phone`
+    padding: ${rem(15)} ${rem(40)};
+    font-size: ${rem(18)};
+  `} ${media.smallPhone`
+    padding: ${rem(15)} ${rem(40)};
+    font-size: ${rem(18)};
+  `};
 `
 
 const ResultsWrapper = styled.div`
