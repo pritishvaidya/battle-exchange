@@ -10,7 +10,7 @@ const HomeWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   ${media.desktop`
-      padding: 0 15vw 5vh 15vw;
+      padding: 0 10vw 5vh 10vw;
   `} ${media.tablet`
     padding: 0 10vw 5vh 10vw;
   `} ${media.phone`
@@ -24,7 +24,16 @@ const HomeWrapper = styled.div`
 
 const BattleIllustrationIcon = styled.svg`
   width: ${rem(550)};
-`
+  ${media.desktop`
+    width: ${rem(700)};
+    `} ${media.tablet`
+    width: ${rem(550)};
+  `} ${media.phone`
+    width: ${rem(400)};
+  `} ${media.smallPhone`
+   width: ${rem(300)};
+  `};
+ `
 
 const ButtonWrapper = styled.div`
   position: fixed;
@@ -60,6 +69,19 @@ const BattleButton = styled.button`
     opacity: 0.8;
     box-shadow: rgba(37, 15, 138, 20%) 0 ${rem(5)} ${rem(30)} 0;
   }
-`
+  ${media.desktop`
+    padding: ${rem(30)} ${rem(90)};
+    font-size: ${rem(30)};
+  `} ${media.tablet`
+    padding: ${rem(20)} ${rem(70)};
+    font-size: ${rem(25)};
+  `} ${media.phone`
+    padding: ${rem(20)} ${rem(70)};
+    font-size: ${rem(20)};
+  `} ${media.smallPhone`
+    padding: ${rem(16)} ${rem(60)};
+    font-size: ${rem(18)};
+  `};
+ `
 
 export { HomeWrapper, BattleIllustrationIcon, ButtonWrapper, BattleButton }

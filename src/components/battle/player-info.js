@@ -9,9 +9,6 @@ import {
   ProfileName,
   ReputationWrapper,
   SiteLogo,
-  BadgeWrapper,
-  Badge,
-  BadgeDot,
   ChartWrapper,
   EmptyGraph,
   CloseWrapper,
@@ -22,7 +19,7 @@ import FetchGraphData from '../../utils/fetch-graph-data'
 
 import { Graph } from '../../config'
 
-import { Badges } from '../../theme'
+import PlayerBadge from './player-badge'
 
 const PlayerInfo = React.memo(function PlayerInfo({
   clear,
@@ -81,35 +78,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
         )}
         {formatReputation(reputation)}
       </ReputationWrapper>
-      <BadgeWrapper>
-        {!!gold && (
-          <Badge
-            background={Badges.gold.background}
-            border={Badges.gold.border}
-          >
-            <BadgeDot color={Badges.gold.dot} />
-            {gold}
-          </Badge>
-        )}
-        {!!silver && (
-          <Badge
-            background={Badges.silver.background}
-            border={Badges.silver.border}
-          >
-            <BadgeDot color={Badges.silver.dot} />
-            {silver}
-          </Badge>
-        )}
-        {!!bronze && (
-          <Badge
-            background={Badges.bronze.background}
-            border={Badges.bronze.border}
-          >
-            <BadgeDot color={Badges.bronze.dot} />
-            {bronze}
-          </Badge>
-        )}
-      </BadgeWrapper>
+      <PlayerBadge silver={silver} gold={gold} bronze={bronze} />
       <ChartWrapper>
         <ReactHighcharts
           config={{

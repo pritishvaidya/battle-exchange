@@ -25,7 +25,7 @@ function Players({ cookies }) {
       ...player,
       [playerStatus]: {
         ...player[playerStatus],
-        reputationGraphData: playerStatus,
+        reputationGraphData: data,
       },
     })
   }

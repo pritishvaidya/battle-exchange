@@ -62,22 +62,22 @@ function Results({ player, cookies }) {
                   ...Graph.chart,
                   width: window.innerWidth / 1.5,
                 },
-                series:
-                  player['player1'].reputationGraphData &&
+                series: [
+                  player['player1'].reputationGraphData
+                    ? {
+                        ...player['player1'].reputationGraphData,
+                        name: 'Player 1',
+                        _colorIndex: null,
+                      }
+                    : { name: 'Player 1', data: [] },
                   player['player2'].reputationGraphData
-                    ? [
-                        {
-                          ...player['player1'].reputationGraphData,
-                          name: 'Player 1',
-                          _colorIndex: null,
-                        },
-                        {
-                          ...player['player2'].reputationGraphData,
-                          name: 'Player 2',
-                          _colorIndex: null,
-                        },
-                      ]
-                    : [],
+                    ? {
+                        ...player['player2'].reputationGraphData,
+                        name: 'Player 2',
+                        _colorIndex: null,
+                      }
+                    : { name: 'Player 1', data: [] },
+                ],
               }}
             />
           </ChartWrapper>

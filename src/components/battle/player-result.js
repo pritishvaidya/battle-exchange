@@ -35,12 +35,13 @@ const PlayerResult = React.memo(function PlayerResult({
   const currentSite = SiteList.filter(
     ({ api_site_parameter }) => api_site_parameter === cookie
   )
-  const [onSetEnd] = useState(false)
+  const [end, onSetEnd] = useState(false)
 
   const onEnd = () => {
     fetchResult(totalScore)
-    onSetEnd(true)
+    onSetEnd(!end)
   }
+
   return (
     <PlayerWrapper info>
       <ProfileWrapper info>

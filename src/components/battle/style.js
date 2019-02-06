@@ -169,10 +169,14 @@ const PlayersWrapper = styled.div`
 const PlayerWrapper = styled.div`
   position: relative;
   display: flex;
-  width: 50vw;
+  width: 40vw;
   align-items: center;
   flex-direction: column;
-  padding: ${props => (props.info ? '5vh 2vw 0 2vw' : '15vh 2vw 0 2vw')};
+  padding-top: 3vh;
+  margin: ${props => (props.info ? '2vh 5vw 0 5vw' : '15vh 2vw 0 2vw')};
+  box-shadow: ${props =>
+    props.info ? `0 ${rem(2)} ${rem(6)} rgba(37, 15, 138, 20%)` : 'none'};
+  background-color: ${props => (props.end ? '#66ee78' : '#FFFFFF')};
   ${media.desktop`
       padding: 0 15vw 5vh 15vw;
   `} ${media.tablet`
@@ -246,7 +250,10 @@ const ChartWrapper = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
+  padding: ${props => (props.result ? '5vh 5vw 5vh 5vw' : '0 5vw 0 5vw')};
   margin-top: ${props => (props.result ? '10vh' : '2vh')};
+  box-shadow: ${props =>
+    props.result ? `0 ${rem(2)} ${rem(6)} rgba(37, 15, 138, 20%)` : 'none'};
 `
 
 const EmptyGraph = styled.div`
@@ -262,10 +269,10 @@ const EmptyGraph = styled.div`
 
 const CloseWrapper = styled.button`
   position: absolute;
-  top: 0;
-  right: 5vw;
+  top: 2vh;
+  right: 1vw;
   font-weight: bold;
-  font-size: ${rem(14)};
+  font-size: ${rem(16)};
   margin: 0;
   border: 0;
   cursor: pointer;
@@ -284,6 +291,7 @@ const ResultsWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin: 0 15vw 5vh 15vw;
   ${media.desktop`
       padding: 0 15vw 5vh 15vw;
   `} ${media.tablet`
@@ -298,7 +306,7 @@ const ResultsWrapper = styled.div`
 const MultiplierWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5vh 10vw 0 15vw;
+  padding: 5vh 5vw 0 10vw;
   width: 100%;
 `
 
@@ -323,7 +331,7 @@ const FieldWrapper = styled.div`
 `
 
 const Name = styled.span`
-  font-weight: 600;
+  font-weight: 500;
 `
 
 const Value = styled.span`
@@ -333,9 +341,10 @@ const Value = styled.span`
 `
 
 const Total = styled.div`
-  padding-top: 5vh;
-  font-weight: bold;
-  font-size: ${rem(35)};
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  font-weight: normal;
+  font-size: ${rem(50)};
 `
 
 export {
