@@ -24,7 +24,9 @@ function Sites({ cookies }) {
         ({ name }) =>
           name.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
       )
-      return filterSiteList(filteredList)
+      return filteredList.length
+        ? filterSiteList(filteredList)
+        : filterSiteList(SiteList)
     } else {
       return filterSiteList(SiteList)
     }

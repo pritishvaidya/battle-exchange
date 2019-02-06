@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { PageType } from '../../pages'
 
 import IconEmpty from './icon-empty'
-import IconFill from './icon-fill'
 import openLink from '../../utils/open-link'
 
 import { NavWrapper, StartWrapper, LogoLink } from './style'
@@ -18,7 +17,7 @@ function Nav() {
           link={pageType !== PageTypes.Home}
           onClick={() => openLink('', '_self')}
         >
-          {pageType === PageTypes.Home ? <IconEmpty /> : <IconFill />}
+          <IconEmpty />
           Battle Exchange
         </LogoLink>
       </StartWrapper>

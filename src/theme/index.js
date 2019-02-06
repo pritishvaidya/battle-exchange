@@ -1,4 +1,4 @@
-const Navbar = '#FFFFFF'
+const Navbar = '#FF6B63'
 const Primary = '#FF6B63'
 const Gradient1 = '#FF6B63'
 const Gradient2 = '#FF783C'

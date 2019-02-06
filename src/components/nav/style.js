@@ -20,13 +20,14 @@ const NavWrapper = styled.nav`
   color: ${props => props.theme.primary};
   padding: 0 5vw 0 2vw;
   ${media.desktop`
-    padding: 0 5vw 0 7vw;
+      padding: 0 5vw 0 3vw;
   `} ${media.tablet`
-    padding: 0 5vw 0 4vw;
+    padding: 0 5vw 0 3vw;
   `} ${media.phone`
-    padding: 0 5vw 0 7vw;
+    padding: 0 5vw 0 3vw;
+    font
   `} ${media.smallPhone`
-    padding: 0 5vw 0 7vw;
+    padding: 0 5vw 0 3vw;
   `}; 
 `
 
@@ -167,7 +168,7 @@ const LogoLink = styled.div`
   cursor: pointer;
   letter-spacing: ${rem(0.4)};
   font-size: ${rem(16)};
-  color: ${props => (props.link ? props.theme.primary : props.theme.link)};
+  color: ${props => props.theme.link};
   &:hover,
   &:focus {
     opacity: 0.6;
@@ -175,7 +176,14 @@ const LogoLink = styled.div`
   &:active {
     opacity: 0.6;
   }
-`
+  ${media.desktop`
+    `} ${media.tablet`
+  `} ${media.phone`
+    font-size: ${rem(0)};
+  `} ${media.smallPhone`
+    font-size: ${rem(0)};
+  `};
+ `
 
 export {
   NavWrapper,
