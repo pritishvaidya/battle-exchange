@@ -22,8 +22,29 @@ const HomeWrapper = styled.div`
     props.theme.gradient1}, ${props => props.theme.gradient2});
 `
 
+const IllustrationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+`
+
 const BattleIllustrationIcon = styled.svg`
   width: ${rem(550)};
+  ${media.desktop`
+    width: ${rem(700)};
+    `} ${media.tablet`
+    width: ${rem(550)};
+  `} ${media.phone`
+    width: ${rem(400)};
+  `} ${media.smallPhone`
+   width: ${rem(300)};
+  `};
+ `
+
+const PlayerIllustrationIcon = styled.svg`
+  position: relative;
+  width: ${rem(350)};
   ${media.desktop`
     width: ${rem(700)};
     `} ${media.tablet`
@@ -84,4 +105,11 @@ const BattleButton = styled.button`
   `};
  `
 
-export { HomeWrapper, BattleIllustrationIcon, ButtonWrapper, BattleButton }
+export {
+  HomeWrapper,
+  IllustrationWrapper,
+  BattleIllustrationIcon,
+  PlayerIllustrationIcon,
+  ButtonWrapper,
+  BattleButton,
+}

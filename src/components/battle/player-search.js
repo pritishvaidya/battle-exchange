@@ -75,6 +75,7 @@ function PlayerSearch({ onSubmitPlayer, autoFocus, type, cookie }) {
         open={loading && list.length && focused}
       />
       <SearchResults
+        type={type}
         searchString={searchString}
         loading={loading}
         data={list}

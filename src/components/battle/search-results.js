@@ -14,6 +14,8 @@ import {
 import SearchLoader from './search-loader'
 
 import formatReputation from '../../utils/format-reputation'
+import Player1BattleIllustration from './player2_battle_illustration'
+import Player2BattleIllustration from './player1_battle_illustration'
 
 function SearchResults({
   submit,
@@ -22,6 +24,7 @@ function SearchResults({
   data,
   focused,
   site: { icon_url },
+  type,
 }) {
   const regex = new RegExp(searchString, 'gi')
   if (focused) {
@@ -63,10 +66,18 @@ function SearchResults({
         </SearchResultsWrapper>
       )
     } else {
-      return null
+      return type === 'player1' ? (
+        <Player1BattleIllustration />
+      ) : (
+        <Player2BattleIllustration />
+      )
     }
   } else {
-    return null
+    return type === 'player1' ? (
+      <Player1BattleIllustration />
+    ) : (
+      <Player2BattleIllustration />
+    )
   }
 }
 
@@ -82,6 +93,7 @@ SearchResults.propTypes = {
   data: PropTypes.array.isRequired,
   focused: PropTypes.bool,
   site: PropTypes.object,
+  type: PropTypes.string,
 }
 
 export default SearchResults
