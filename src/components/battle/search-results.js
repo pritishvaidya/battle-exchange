@@ -14,8 +14,8 @@ import {
 import SearchLoader from './search-loader'
 
 import formatReputation from '../../utils/format-reputation'
-import Player1BattleIllustration from './player2_battle_illustration'
-import Player2BattleIllustration from './player1_battle_illustration'
+import Player1BattleIllustration from './player1_battle_illustration'
+import Player2BattleIllustration from './player2_battle_illustration'
 
 function SearchResults({
   submit,

@@ -76,12 +76,16 @@ const SearchBarWrapper = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.07);
   box-shadow: 0 ${rem(2)} ${rem(6)} rgba(0, 0, 0, 0.05);
   ${media.desktop`
+    width: ${props => !props.site && '40vw'};
     margin: ${props => (props.site ? `0 15vw 5vh 15vw` : `0 0 0 0`)};
     `} ${media.tablet`
+    width: ${props => !props.site && '50vw'};
     margin: ${props => (props.site ? `0 15vw 5vh 15vw` : `0 0 0 0`)};
   `} ${media.phone`
+    width: ${props => !props.site && '90vw'};
     margin: ${props => (props.site ? `0 5vw 5vh 5vw` : `0 0 0 0`)};
   `} ${media.smallPhone`
+    width: ${props => !props.site && '90vw'};
     margin: ${props => (props.site ? `5vh 5vw 5vh 5vw` : `0 0 0 0`)};
   `};
  `
@@ -100,6 +104,7 @@ const SearchBarInput = styled.input`
   color: ${props => props.theme.searchbarText};
   ${media.desktop`
     padding: 2vh 3vw 2vh 3vw;
+      font-size: ${rem(25)};
   `} ${media.tablet`
     padding: 2vh 3vw 2vh 3vw;
   `} ${media.phone`
@@ -187,11 +192,13 @@ const PlayersWrapper = styled.div`
   ${media.desktop`
       padding: 0 15vw 5vh 15vw;
   `} ${media.tablet`
+      flex-direction: column;
+      align-items: center;
       padding: 0 10vw 5vh 10vw;
     `} ${media.phone`
       padding: 0 5vw 5vh 5vw;
     `} ${media.smallPhone`
-      padding: 0 5vw 5vh 5vw;
+      padding: 5vh 5vw 5vh 5vw;
     `};
 `
 
@@ -207,13 +214,13 @@ const PlayerWrapper = styled.div`
     props.info ? `0 ${rem(2)} ${rem(6)} rgba(37, 15, 138, 20%)` : 'none'};
   background-color: ${props => (props.end ? '#66ee78' : '#FFFFFF')};
   ${media.desktop`
-      padding: 0 15vw 5vh 15vw;
+      padding: 0 15vw 0 15vw;
   `} ${media.tablet`
-      padding: 0 10vw 5vh 10vw;
+      padding: 0 10vw 0 10vw;
     `} ${media.phone`
-      padding: 0 5vw 5vh 5vw;
+      padding: 0 5vw 0 5vw;
     `} ${media.smallPhone`
-      padding: 0 5vw 5vh 5vw;
+      padding: 0 5vw 0 5vw;
     `};
 `
 

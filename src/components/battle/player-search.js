@@ -71,7 +71,7 @@ function PlayerSearch({ onSubmitPlayer, autoFocus, type, cookie }) {
         onFocus={onFocus}
         onSubmit={onSubmit}
         autoFocus={autoFocus}
-        placeholder={`Enter the ${_.startCase(_.toLower(type))} name...`}
+        placeholder={`Enter ${_.startCase(_.toLower(type))} name...`}
         open={loading && list.length && focused}
       />
       <SearchResults

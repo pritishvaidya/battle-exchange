@@ -46,11 +46,11 @@ const PlayerIllustrationIcon = styled.svg`
   position: relative;
   width: ${rem(350)};
   ${media.desktop`
-    width: ${rem(700)};
+    width: ${rem(350)};
     `} ${media.tablet`
-    width: ${rem(550)};
+    width: ${rem(350)};
   `} ${media.phone`
-    width: ${rem(400)};
+    width: ${rem(300)};
   `} ${media.smallPhone`
    width: ${rem(300)};
   `};
