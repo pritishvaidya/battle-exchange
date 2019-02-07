@@ -2,7 +2,7 @@
 async function GraphData(id, name) {
   try {
     const response = await fetch(
-      `https://stackexchange.com/users/${id}?tab=reputation`
+      `/stackexchange.com/users/${id}?tab=reputation`
     )
     const string = await response.text()
     const regex = new RegExp(`\\{([^}]+)\\}`, 'gm')
