@@ -1,7 +1,9 @@
 /*eslint-disable no-empty*/
 async function GraphData(id, name) {
   try {
-    const response = await fetch(`/stackexchange/users/${id}?tab=reputation`)
+    const response = await fetch(
+      `https://stackexchange.com/users/${id}?tab=reputation`
+    )
     const string = await response.text()
     const regex = new RegExp(`\\{([^}]+)\\}`, 'gm')
     const items = string.match(regex)

@@ -36,7 +36,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "npm run clean && gatsby build",
     "clean": "rimraf .cache public",
     "develop": "npm run clean && gatsby develop",
     "start": "npm run develop",
