@@ -3,8 +3,8 @@ module.exports = {
     title: `Battle Exchange`,
     description: `A battle in between Stack Exchange Sites`,
     author: `Pritish Vaidya`,
-    // siteUrl: `https://battleexchange.com`,
-    // canonicalUrl: "https://battlexchange.com"
+    siteUrl: `https://battleexchange.com`,
+    canonicalUrl: 'https://battlexchange.com',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

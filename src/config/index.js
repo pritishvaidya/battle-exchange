@@ -26,6 +26,8 @@ const CookieList = {
   default: 'siteCookie',
 }
 
+const windowGlobal = typeof window !== 'undefined' && window
+
 const Graph = {
   chart: {
     renderTo: 'reputation-graph',
@@ -39,10 +41,10 @@ const Graph = {
 
     // Explicitly tell the width and height of a chart
     width:
-      window.innerWidth <= 768
-        ? window.innerWidth / 1.2
-        : window.innerWidth / 3,
-    height: window.innerHeight / 2.5,
+      windowGlobal.innerWidth <= 768
+        ? windowGlobal.innerWidth / 1.2
+        : windowGlobal.innerWidth / 3,
+    height: windowGlobal.innerHeight / 2.5,
   },
   credits: {
     enabled: false,
