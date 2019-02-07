@@ -6,6 +6,8 @@ const Shadow = '#deddfd'
 const Link = '#FFFFFF'
 const SearchBar = '#D3D3D3'
 const SearchBarText = '#9aa1aa'
+const Success = '#00e98b'
+const Error = '#FF6B63'
 const Badges = {
   gold: {
     background: '#fffae6',
@@ -31,6 +33,8 @@ const Theme = {
   primary: Primary,
   shadow: Shadow,
   link: Link,
+  success: Success,
+  error: Error,
   searchbar: SearchBar,
   searchbarText: SearchBarText,
   badges: Badges,
@@ -43,6 +47,7 @@ export {
   Gradient2,
   Shadow,
   Link,
+  Success,
   SearchBar,
   SearchBarText,
   Badges,

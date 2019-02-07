@@ -56,6 +56,21 @@ const PlayerIllustrationIcon = styled.svg`
   `};
  `
 
+const SuccessErrorIcon = styled.svg`
+  padding-top: 5vh;
+  width: ${rem(400)};
+  ${media.desktop`
+    width: ${rem(300)};
+  `} ${media.tablet`
+    width: ${rem(300)};
+  `} ${media.phone`
+    width: ${rem(300)};
+  `} ${media.smallPhone`
+   width: ${rem(250)};
+  `};
+  filter: drop-shadow(${rem(2)} ${rem(4)} ${rem(5)} rgba(0, 0, 0, .7));
+  `
+
 const ButtonWrapper = styled.div`
   position: fixed;
   bottom: 5vh;
@@ -110,6 +125,7 @@ export {
   IllustrationWrapper,
   BattleIllustrationIcon,
   PlayerIllustrationIcon,
+  SuccessErrorIcon,
   ButtonWrapper,
   BattleButton,
 }

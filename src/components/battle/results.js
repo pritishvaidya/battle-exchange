@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Redirect } from '@reach/router'
 import { Cookies, withCookies } from 'react-cookie'
+import Highcharts from 'highcharts'
 import ReactHighcharts from 'react-highcharts'
 import PropTypes, { instanceOf } from 'prop-types'
 
@@ -9,16 +10,26 @@ import PlayerResult from './player-result'
 import { PlayersWrapper, ResultsWrapper, ChartWrapper } from './style'
 import { CookieList, Graph, Routes } from '../../config'
 
+const categories = ['Reputation', 'Gold * 1000', 'Silver * 500', 'Bronze * 100']
+
 function Results({ player, cookies }) {
   const siteCookie = cookies.get(CookieList.default)
-  const [playerResult, setPlayerResult] = useState({
-    player1: null,
-    player2: null,
-  })
 
   if (!(player && siteCookie)) {
     return <Redirect to={Routes.Battle.site} noThrow />
   }
+
+  const playerResult = {}
+  playerResult['player1'] =
+    player['player1'].reputation +
+    player['player1'].badge_counts.gold * 1000 +
+    player['player1'].badge_counts.silver * 500 +
+    player['player1'].badge_counts.bronze * 100
+  playerResult['player2'] =
+    player['player2'].reputation +
+    player['player2'].badge_counts.gold * 1000 +
+    player['player2'].badge_counts.silver * 500 +
+    player['player2'].badge_counts.bronze * 100
 
   const result =
     playerResult['player1'] > playerResult['player2'] ? 'player1' : 'player2'
@@ -27,99 +38,164 @@ function Results({ player, cookies }) {
     <ResultsWrapper>
       <PlayersWrapper>
         <PlayerResult
-          result={result === 'player1'}
+          type={'player1'}
+          result={result}
           cookie={siteCookie}
           data={player['player1']}
-          fetchResult={result => {
-            setPlayerResult(prevState => ({
-              ...prevState,
-              player1: result,
-            }))
-          }}
         />
         <PlayerResult
-          result={result === 'player2'}
+          type={'player2'}
+          result={result}
           cookie={siteCookie}
           data={player['player2']}
-          fetchResult={result => {
-            setPlayerResult(prevState => ({
-              ...prevState,
-              player2: result,
-            }))
-          }}
         />
       </PlayersWrapper>
-      {playerResult['player1'] && playerResult['player2'] && (
-        <>
-          <ChartWrapper result>
-            <ReactHighcharts
-              config={{
-                ...Graph,
-                title: {
-                  text: 'Reputation Comparison',
+      <ChartWrapper result>
+        <ReactHighcharts
+          config={{
+            ...Graph,
+            title: {
+              text: 'Overall Comparison',
+            },
+            chart: {
+              ...Graph.chart,
+              width:
+                window.innerWidth <= 768
+                  ? window.innerWidth / 1.1
+                  : window.innerWidth / 1.5,
+              type: 'bar',
+            },
+            xAxis: [
+              {
+                categories,
+                reversed: true,
+                labels: {
+                  step: 1,
                 },
-                chart: {
-                  ...Graph.chart,
-                  width: window.innerWidth / 1.5,
+              },
+              {
+                opposite: true,
+                categories,
+                linkedTo: 0,
+                labels: {
+                  step: 1,
                 },
-                series: [
-                  player['player1'].reputationGraphData
-                    ? {
-                        ...player['player1'].reputationGraphData,
-                        name: 'Player 1',
-                        _colorIndex: null,
-                      }
-                    : { name: 'Player 1', data: [] },
-                  player['player2'].reputationGraphData
-                    ? {
-                        ...player['player2'].reputationGraphData,
-                        name: 'Player 2',
-                        _colorIndex: null,
-                      }
-                    : { name: 'Player 1', data: [] },
+              },
+            ],
+            plotOptions: {
+              series: {
+                stacking: 'normal',
+              },
+            },
+            tooltip: {
+              formatter: function() {
+                return (
+                  '<b>' +
+                  this.series.name +
+                  ', ' +
+                  this.point.category +
+                  '</b><br/>' +
+                  'Population: ' +
+                  Highcharts.numberFormat(Math.abs(this.point.y), 0)
+                )
+              },
+            },
+            series: [
+              {
+                name: 'Player 1',
+                data: [
+                  -player['player1'].reputation,
+                  -player['player1'].badge_counts.gold * 1000,
+                  -player['player1'].badge_counts.silver * 500,
+                  -player['player1'].badge_counts.bronze * 100,
                 ],
-              }}
-            />
-          </ChartWrapper>
-          <ChartWrapper result>
-            <ReactHighcharts
-              config={{
-                ...Graph,
-                title: {
-                  text: 'Badge Comparison',
-                },
-                chart: {
-                  ...Graph.chart,
-                  type: 'column',
-                  width: window.innerWidth / 1.5,
-                },
-                xAxis: {
-                  categories: ['Gold', 'Silver', 'Bronze'],
-                  crosshair: true,
-                },
-                series: [
-                  {
+              },
+              {
+                name: 'Player 2',
+                data: [
+                  player['player2'].reputation,
+                  player['player2'].badge_counts.gold * 1000,
+                  player['player2'].badge_counts.silver * 500,
+                  player['player2'].badge_counts.bronze * 100,
+                ],
+              },
+            ],
+          }}
+        />
+      </ChartWrapper>
+      <ChartWrapper result>
+        <ReactHighcharts
+          config={{
+            ...Graph,
+            title: {
+              text: 'Reputation Comparison',
+            },
+            chart: {
+              ...Graph.chart,
+              width:
+                window.innerWidth <= 768
+                  ? window.innerWidth / 1.2
+                  : window.innerWidth / 1.5,
+            },
+            series: [
+              player['player1'].reputationGraphData
+                ? {
+                    ...player['player1'].reputationGraphData,
                     name: 'Player 1',
-                    data: [
-                      player['player1'].badge_counts.gold,
-                      player['player1'].badge_counts.silver,
-                      player['player1'].badge_counts.bronze,
-                    ],
-                  },
-                  {
+                    _colorIndex: null,
+                  }
+                : { name: 'Player 1', data: [] },
+              player['player2'].reputationGraphData
+                ? {
+                    ...player['player2'].reputationGraphData,
                     name: 'Player 2',
-                    data: [
-                      player['player2'].badge_counts.gold,
-                      player['player2'].badge_counts.silver,
-                      player['player2'].badge_counts.bronze,
-                    ],
-                  },
+                    _colorIndex: null,
+                  }
+                : { name: 'Player 1', data: [] },
+            ],
+          }}
+        />
+      </ChartWrapper>
+      <ChartWrapper result>
+        <ReactHighcharts
+          config={{
+            ...Graph,
+            title: {
+              text: 'Badge Comparison',
+            },
+            chart: {
+              ...Graph.chart,
+              width:
+                window.innerWidth <= 768
+                  ? window.innerWidth / 1.2
+                  : window.innerWidth / 1.5,
+              type: 'column',
+            },
+            xAxis: {
+              categories: ['Gold', 'Silver', 'Bronze'],
+              crosshair: true,
+            },
+            series: [
+              {
+                name: 'Player 1',
+                data: [
+                  player['player1'].badge_counts.gold,
+                  player['player1'].badge_counts.silver,
+                  player['player1'].badge_counts.bronze,
                 ],
-              }}
-            />
-          </ChartWrapper>
-        </>
-      )}
+              },
+              {
+                name: 'Player 2',
+                data: [
+                  player['player2'].badge_counts.gold,
+                  player['player2'].badge_counts.silver,
+                  player['player2'].badge_counts.bronze,
+                ],
+              },
+            ],
+          }}
+        />
+      </ChartWrapper>
     </ResultsWrapper>
   )
 }

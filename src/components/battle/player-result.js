@@ -1,24 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import CountUp from 'react-countup'
 
 import PlayerBadge from './player-badge'
 
 import {
-  PlayerWrapper,
+  PlayerResultWrapper,
   ProfileWrapper,
   ProfileImage,
   ProfileName,
   ReputationWrapper,
   SiteLogo,
-  MultiplierWrapper,
-  Title,
-  Total,
 } from './style'
 
 import formatReputation from '../../utils/format-reputation'
 import SiteList from '../../utils/site-list'
-import PlayerMultiplierField from './player-multiplier-field'
+
+import IconSuccess from './icon-success'
+import IconError from './icon-error'
 
 const PlayerResult = React.memo(function PlayerResult({
   cookie,
@@ -29,26 +27,20 @@ const PlayerResult = React.memo(function PlayerResult({
     reputation,
     account_id,
   },
-  fetchResult,
+  type,
+  result,
 }) {
-  const totalScore = reputation + gold * 1000 + silver * 500 + bronze * 100
   const currentSite = SiteList.filter(
     ({ api_site_parameter }) => api_site_parameter === cookie
   )
-  const [end, onSetEnd] = useState(false)
-
-  const onEnd = () => {
-    fetchResult(totalScore)
-    onSetEnd(!end)
-  }
 
   return (
-    <PlayerWrapper info>
+    <PlayerResultWrapper info status={result === type ? 'success' : 'error'}>
       <ProfileWrapper info>
         <ProfileImage src={profile_image} big />
-        <ProfileName>{display_name}</ProfileName>
+        <ProfileName status>{display_name}</ProfileName>
       </ProfileWrapper>
-      <ReputationWrapper info>
+      <ReputationWrapper info status>
         {!!currentSite.length && (
           <SiteLogo
             srcSet={`${currentSite[0].icon_url}, ${
@@ -60,52 +52,16 @@ const PlayerResult = React.memo(function PlayerResult({
         {formatReputation(reputation)}
       </ReputationWrapper>
       <PlayerBadge bronze={bronze} silver={silver} gold={gold} />
-      <MultiplierWrapper>
-        <Title>Main</Title>
-        <PlayerMultiplierField
-          name={'Reputation'}
-          value={reputation}
-          start
-          formattingFn={number => number.toLocaleString()}
-        />
-        <Title>Badges</Title>
-        <PlayerMultiplierField
-          name={'Gold'}
-          value={gold * 1000}
-          prefix={`${gold} * 1000 = `}
-          start
-          formattingFn={number => number.toLocaleString()}
-        />
-        <PlayerMultiplierField
-          name={'Silver'}
-          value={silver * 500}
-          prefix={`${silver} * 500 = `}
-          start
-          formattingFn={number => number.toLocaleString()}
-        />
-        <PlayerMultiplierField
-          name={'Bronze'}
-          value={bronze * 100}
-          prefix={`${bronze} * 100 = `}
-          start
-          formattingFn={number => number.toLocaleString()}
-        />
-      </MultiplierWrapper>
-      <Total>
-        <CountUp
-          end={totalScore}
-          onEnd={onEnd}
-          formattingFn={number => number.toLocaleString()}
-        />
-      </Total>
-    </PlayerWrapper>
+      {result === type ? <IconSuccess /> : <IconError />}
+    </PlayerResultWrapper>
   )
 })
 
 PlayerResult.propTypes = {
   cookie: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  fetchResult: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  result: PropTypes.bool.isRequired,
 }
 
 export default PlayerResult

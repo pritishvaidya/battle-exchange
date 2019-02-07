@@ -71,7 +71,6 @@ const Graph = {
         'font-family': "'Avenir,sans-serif;",
       },
     },
-    min: 0.6,
     startOnTick: false,
   },
   tooltip: {

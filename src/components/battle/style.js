@@ -224,8 +224,10 @@ const PlayerWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding-top: 3vh;
+  padding-bottom: 3vh;
+  border-radius: ${rem(20)};
   margin: ${props => (props.info ? '2vh 5vw 0 5vw' : '15vh 2vw 0 2vw')};
-  background-color: ${props => (props.end ? '#66ee78' : '#FFFFFF')};
+  background-color: #FFFFFF;
   ${media.desktop`
       width: 40vw;
       padding: ${props => (props.info ? '10vh 0 0 0' : '0 15vw 0 15vw')};
@@ -238,6 +240,26 @@ const PlayerWrapper = styled.div`
       padding: ${props => (props.info ? '10vh 0 10vh 0' : '0 5vw 0 5vw')};
     `};
 `
+
+const PlayerResultWrapper = styled.div`
+  position: relative;
+  display: flex;
+  width: 35vw;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  border-radius: ${rem(20)};
+  margin: 2vh 5vw 0 5vw;
+  background-color: ${props => props.theme[props.status]};
+  ${media.tablet`
+     width: 50vw;
+  `} ${media.phone`
+     width: 80vw;
+    `} ${media.smallPhone`
+      padding: ${props => (props.info ? '10vh 0 10vh 0' : '0 5vw 0 5vw')};
+    `};
+  `
 
 const ProfileWrapper = styled.div`
   display: flex;
@@ -257,6 +279,7 @@ const ProfileName = styled.div`
   font-size: ${rem(30)};
   font-weight: 500;
   font-family: Avenir, sans-serif;
+  color: ${props => (props.status ? '#FFFFFF' : '#000000')};
 `
 
 const SiteLogo = styled.img`
@@ -267,7 +290,7 @@ const SiteLogo = styled.img`
 const ReputationWrapper = styled.div`
   display: flex;
   align-items: center;
-  color: ${props => props.theme.searchbarText};
+  color: ${props => (props.status ? '#FFFFFF' : props.theme.searchbarText)};
   margin-top: ${props => (props.info ? '1vh' : '0')};
 `
 
@@ -311,8 +334,6 @@ const ChartWrapper = styled.div`
   justify-content: center;
   padding: ${props => (props.result ? '5vh 5vw 5vh 5vw' : '0 5vw 0 5vw')};
   margin-top: ${props => (props.result ? '10vh' : '2vh')};
-  box-shadow: ${props =>
-    props.result ? `0 ${rem(2)} ${rem(6)} rgba(37, 15, 138, 20%)` : 'none'};
 `
 
 const EmptyGraph = styled.div`
@@ -340,6 +361,7 @@ const CloseWrapper = styled.button`
   box-shadow: 0 ${rem(5)} ${rem(10)} rgba(37, 15, 138, 10%);
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
+  z-index: 10;
   &:hover,
   &:focus {
     opacity: 0.9;
@@ -371,13 +393,13 @@ const ResultsWrapper = styled.div`
   flex-direction: column;
   margin: 0 15vw 5vh 15vw;
   ${media.desktop`
-      padding: 0 15vw 5vh 15vw;
+      padding: 10vh 15vw 5vh 15vw;
   `} ${media.tablet`
-      padding: 0 10vw 5vh 10vw;
+      padding: 10vh 15vw 5vh 15vw;
     `} ${media.phone`
-      padding: 0 5vw 5vh 5vw;
+      padding: 10vh 15vw 5vh 15vw;
     `} ${media.smallPhone`
-      padding: 0 5vw 5vh 5vw;
+      padding: 10vh 15vw 5vh 15vw;
     `};
 `
 
@@ -419,10 +441,13 @@ const Value = styled.span`
 `
 
 const Total = styled.div`
+  display: flex;
   margin-top: 10vh;
   margin-bottom: 10vh;
   font-weight: normal;
   font-size: ${rem(50)};
+  color: ${props => props.theme.primary};
+  font-family: Avenir, sans-serif;
 `
 
 export {
@@ -441,6 +466,7 @@ export {
   ProfileImage,
   ProfileName,
   PlayersWrapper,
+  PlayerResultWrapper,
   PlayerWrapper,
   SiteLogo,
   ReputationWrapper,
