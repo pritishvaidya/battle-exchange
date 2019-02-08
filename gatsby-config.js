@@ -49,13 +49,13 @@ module.exports = {
       },
     },
     'gatsby-plugin-sitemap',
-    /* {
+    {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: 'https://battleexchange.com',
         policy: [{ userAgent: '*', allow: '/' }],
       },
-    },*/
-    // 'gatsby-plugin-offline',
+    },
+    'gatsby-plugin-offline',
   ],
 }
