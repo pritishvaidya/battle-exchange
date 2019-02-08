@@ -55,7 +55,7 @@ function IconSuccessError({ status }) {
             >
               <tspan x={status === 'success' ? '50' : '53'} y="20">
                 {status === 'success' && 'WINNER'}
-                {status === 'error' && 'ERROR'}
+                {status === 'error' && 'LOSER'}
                 {status === 'draw' && 'DRAW'}
               </tspan>
             </text>
