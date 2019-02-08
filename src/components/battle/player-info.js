@@ -36,6 +36,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
     ({ api_site_parameter }) => api_site_parameter === cookie
   )
   const [loading, setLoading] = useState(false)
+  const [loadedOnce, setLoadedOnce] = useState(false)
   const [graphData, setGraphData] = useState({
     name: currentSite[0].name,
     data: [],
@@ -43,7 +44,6 @@ const PlayerInfo = React.memo(function PlayerInfo({
 
   async function fetchGraphData(id, name) {
     setLoading(true)
-
     const response = await fetch('/.netlify/functions/fetch-graph-data', {
       method: 'POST',
       body: JSON.stringify({ id, name }),
@@ -53,6 +53,7 @@ const PlayerInfo = React.memo(function PlayerInfo({
       setGraphData(graphData)
       onSubmitGraph(graphData)
     }
+    setLoadedOnce(true)
     setLoading(false)
   }
 
@@ -84,6 +85,8 @@ const PlayerInfo = React.memo(function PlayerInfo({
       <PlayerBadge silver={silver} gold={gold} bronze={bronze} />
       <ChartWrapper>
         <ReactHighcharts
+          isPureConfig
+          neverReflow={loadedOnce}
           config={{
             ...Graph,
             chart: { ...Graph.chart, flex: 1 },
