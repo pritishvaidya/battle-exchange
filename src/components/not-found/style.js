@@ -32,6 +32,11 @@ const Wrapper = styled.div`
   min-height: 100vh;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(
+    to right,
+    ${props => props.theme.gradient1},
+    ${props => props.theme.gradient2}
+  );
 `
 
 const Title = styled.div`
@@ -42,7 +47,7 @@ const Title = styled.div`
   letter-spacing: ${rem(0.4)};
   font-size: ${rem(65)};
   text-align: center;
-  color: ${props => props.theme.primary};
+  color: ${props => props.theme.link};
   ${media.desktop`
       margin: 3vh 0 3vh 0;
   `} ${media.tablet`
@@ -66,7 +71,7 @@ const Description = styled.div`
   line-height: ${rem(24)};
   max-width: 30vw;
   text-align: center;
-  color: ${props => props.theme.primary};
+  color: ${props => props.theme.link};
   ${media.desktop`
       margin: 3vh 0 3vh 0;
       max-width: 50vw;
@@ -90,7 +95,7 @@ const Description = styled.div`
 const Button = styled.div`
   margin: 5vh 0 10vh 0;
   z-index: 1;
-  border ${rem(1)} solid ${props => props.theme.primary};
+  border ${rem(1)} solid ${props => props.theme.link};
   border-radius: 0.1vw;
   padding: 2vh 2vw 2vh 2vw;
   font-family: 'Avenir', serif;
@@ -99,7 +104,7 @@ const Button = styled.div`
   font-size: ${rem(20)};
   line-height: ${rem(24)};
   text-align: center;
-  color: ${props => props.theme.primary};
+  color: ${props => props.theme.link};
   transition: opacity 0.2s, transform 0.2s;
   cursor: pointer;
   &:hover,

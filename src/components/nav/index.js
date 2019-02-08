@@ -11,7 +11,9 @@ import { PageTypes, Routes } from '../../config'
 function Nav() {
   const { pageType } = useContext(PageType)
   return (
-    <NavWrapper transparent={pageType === PageTypes.Home}>
+    <NavWrapper
+      transparent={pageType === PageTypes.Home || pageType === PageTypes.Error}
+    >
       <StartWrapper>
         <LogoLink
           link={pageType !== PageTypes.Home}
