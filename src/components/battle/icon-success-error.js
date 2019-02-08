@@ -1,8 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { SuccessErrorIcon } from '../home/style'
 
-function IconSuccess() {
+function IconSuccessError({ status }) {
+  let color
+  if (status === 'success') {
+    color = '#425400'
+  } else if (status === 'error') {
+    color = '#FF6B63'
+  } else {
+    color = '#FF783C'
+  }
   return (
     <SuccessErrorIcon shadow viewBox="0 0 152 56">
       <g
@@ -12,12 +21,12 @@ function IconSuccess() {
         fill="none"
         fillRule="evenodd"
       >
-        <g id="Logo" transform="translate(-99.000000, -131.000000)">
-          <g id="success" transform="translate(99.000000, 131.000000)">
+        <g id="Logo" transform="translate(-99.000000, -226.000000)">
+          <g id="success-error" transform="translate(99.000000, 226.000000)">
             <g id="Group" fillRule="nonzero">
               <g
                 transform="translate(0.000000, 15.655914)"
-                fill="#00E98B"
+                fill={color}
                 id="Path"
               >
                 <path d="M40.2775873,25.6570323 C28.8896508,28.9170753 17.6549206,33.7493333 6.7235873,40.1532043 C8.43057143,34.5194839 10.2847302,28.9122581 12.2866667,23.3447742 C8.40765079,20.7543226 4.41825397,18.3348817 0.320888889,16.1015054 C12.2619365,9.10632258 24.534127,3.82726882 36.974,0.265548387 C38.0747937,8.72937634 39.1761905,17.1932043 40.2775873,25.6570323 Z" />
@@ -25,7 +34,7 @@ function IconSuccess() {
               </g>
               <g
                 transform="translate(27.746032, 27.698925)"
-                fill="#425400"
+                fill={color}
                 id="Path"
               >
                 <path d="M12.5315556,13.6140215 C12.5315556,13.6140215 10.4590476,7.0036129 0.991015873,7.11621505 L0.43247619,3.79294624 L10.8137143,0.415483871 L12.5315556,13.6140215 Z" />
@@ -34,19 +43,20 @@ function IconSuccess() {
               <path
                 d="M127.562381,9.72473118 C93.7381587,-2.78916129 58.343873,-2.78916129 24.5196508,9.72473118 C25.9256508,18.088 27.3316508,26.451871 28.7376508,34.8145376 C59.7926984,23.3255054 92.2899365,23.3255054 123.344984,34.8145376 C124.750381,26.451871 126.156381,18.088 127.562381,9.72473118 Z"
                 id="Path"
-                fill="#00E98B"
+                fill={color}
               />
             </g>
             <text
-              id="WINNER"
+              id="ERROR"
               fontFamily="AvenirNext-DemiBold, Avenir Next"
               fontSize="14"
               fontWeight="500"
-              letterSpacing="1"
               fill="#FFFFFF"
             >
-              <tspan x="44.905" y="21">
-                WINNER
+              <tspan x="53" y="20">
+                {status === 'success' && 'WINNER'}
+                {status === 'error' && 'ERROR'}
+                {status === 'draw' && 'DRAW'}
               </tspan>
             </text>
           </g>
@@ -56,4 +66,8 @@ function IconSuccess() {
   )
 }
 
-export default IconSuccess
+IconSuccessError.propTypes = {
+  status: PropTypes.string,
+}
+
+export default IconSuccessError

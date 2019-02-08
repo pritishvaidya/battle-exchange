@@ -15,8 +15,7 @@ import {
 import formatReputation from '../../utils/format-reputation'
 import SiteList from '../../utils/site-list'
 
-import IconSuccess from './icon-success'
-import IconError from './icon-error'
+import IconSuccessError from './icon-success-error'
 
 const PlayerResult = React.memo(function PlayerResult({
   cookie,
@@ -35,7 +34,12 @@ const PlayerResult = React.memo(function PlayerResult({
   )
 
   return (
-    <PlayerResultWrapper info status={result === type ? 'success' : 'error'}>
+    <PlayerResultWrapper
+      info
+      status={
+        result === type ? 'success' : result === 'draw' ? 'draw' : 'error'
+      }
+    >
       <ProfileWrapper info>
         <ProfileImage src={profile_image} big />
         <ProfileName status>{display_name}</ProfileName>
@@ -52,7 +56,11 @@ const PlayerResult = React.memo(function PlayerResult({
         {formatReputation(reputation)}
       </ReputationWrapper>
       <PlayerBadge bronze={bronze} silver={silver} gold={gold} />
-      {result === type ? <IconSuccess /> : <IconError />}
+      <IconSuccessError
+        status={
+          result === type ? 'success' : result === 'draw' ? 'draw' : 'error'
+        }
+      />
     </PlayerResultWrapper>
   )
 })

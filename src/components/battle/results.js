@@ -13,6 +13,7 @@ import { CookieList, Graph, Routes } from '../../config'
 const categories = ['Reputation', 'Gold * 1000', 'Silver * 500', 'Bronze * 100']
 
 function Results({ player, cookies }) {
+  let result
   const siteCookie = cookies.get(CookieList.default)
 
   if (!(player && siteCookie)) {
@@ -31,8 +32,13 @@ function Results({ player, cookies }) {
     player['player2'].badge_counts.silver * 500 +
     player['player2'].badge_counts.bronze * 100
 
-  const result =
-    playerResult['player1'] > playerResult['player2'] ? 'player1' : 'player2'
+  if (playerResult['player1'] > playerResult['player2']) {
+    result = 'player1'
+  } else if (playerResult['player1'] < playerResult['player2']) {
+    result = 'player2'
+  } else {
+    result = 'draw'
+  }
 
   return (
     <ResultsWrapper>

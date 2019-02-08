@@ -8,6 +8,7 @@ const SearchBar = '#D3D3D3'
 const SearchBarText = '#9aa1aa'
 const Success = '#00e98b'
 const Error = '#FF6B63'
+const Draw = '#FF783C'
 const Badges = {
   gold: {
     background: '#fffae6',
@@ -35,6 +36,7 @@ const Theme = {
   link: Link,
   success: Success,
   error: Error,
+  draw: Draw,
   searchbar: SearchBar,
   searchbarText: SearchBarText,
   badges: Badges,
