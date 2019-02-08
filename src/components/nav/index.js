@@ -6,7 +6,7 @@ import openLink from '../../utils/open-link'
 
 import { NavWrapper, StartWrapper, LogoLink } from './style'
 
-import { PageTypes } from '../../config'
+import { PageTypes, Routes } from '../../config'
 
 function Nav() {
   const { pageType } = useContext(PageType)
@@ -15,7 +15,7 @@ function Nav() {
       <StartWrapper>
         <LogoLink
           link={pageType !== PageTypes.Home}
-          onClick={() => openLink('', '_self')}
+          onClick={() => openLink(Routes.Home, '_self')}
         >
           <IconEmpty />
           Battle Exchange

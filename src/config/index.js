@@ -4,9 +4,11 @@ const PageTypes = {
   Sites: 'sites',
   Players: 'players',
   Results: 'results',
+  Error: 'error',
 }
 
 const Routes = {
+  Home: 'https://battleexchange.com',
   Battle: {
     default: '/battle',
     backslashDefault: '/battle/',

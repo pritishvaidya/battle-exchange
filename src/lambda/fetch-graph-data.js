@@ -1,6 +1,7 @@
+/*eslint-disable no-empty*/
 import fetch from 'node-fetch'
 
-exports.handler = async function(event, callback) {
+exports.handler = async function(event) {
   const { id, name } = JSON.parse(event.body)
   try {
     const response = await fetch(
