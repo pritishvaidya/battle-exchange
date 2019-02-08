@@ -15,7 +15,6 @@ import {
 } from './style'
 import formatReputation from '../../utils/format-reputation'
 import SiteList from '../../utils/site-list'
-import FetchGraphData from '../../utils/fetch-graph-data'
 
 import { Graph } from '../../config'
 
@@ -44,7 +43,12 @@ const PlayerInfo = React.memo(function PlayerInfo({
 
   async function fetchGraphData(id, name) {
     setLoading(true)
-    const graphData = await FetchGraphData(id, name)
+
+    const response = await fetch('/.netlify/functions/fetch-graph-data', {
+      method: 'POST',
+      body: JSON.stringify({ id, name }),
+    })
+    const graphData = await response.json()
     if (graphData) {
       setGraphData(graphData)
       onSubmitGraph(graphData)

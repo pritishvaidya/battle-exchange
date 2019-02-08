@@ -76,7 +76,7 @@ function Players({ cookies }) {
                 navigate(Routes.Battle.results, { state: { player } })
               }
             >
-              Start Battle
+              Fight
             </BattleButton>
           </ButtonWrapper>
         )}

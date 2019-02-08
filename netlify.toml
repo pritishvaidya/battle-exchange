@@ -1,6 +1,7 @@
 [build]
-  publish = "public"
-  command = "npm run build"
+  Command = "npm run build"
+  Functions = "lambda"
+  Publish = "public"
 [build.environment]
   YARN_VERSION = "1.9.4"
   YARN_FLAGS = "--no-ignore-optional"
@@ -10,6 +11,8 @@
   status = 301
   force = true
 [[redirects]]
-  from = "/stackexchange/*"
-  to = "https://stackexchange.com/:splat"
-  status = 200
+  from = "/battle"
+  to = "/battle/sites"
+[[redirects]]
+  from = "/battle/"
+  to = "/battle/sites"
