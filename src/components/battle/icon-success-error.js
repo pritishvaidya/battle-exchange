@@ -6,7 +6,7 @@ import { SuccessErrorIcon } from '../home/style'
 function IconSuccessError({ status }) {
   let color
   if (status === 'success') {
-    color = '#425400'
+    color = '#00e98b'
   } else if (status === 'error') {
     color = '#FF6B63'
   } else {
@@ -34,7 +34,7 @@ function IconSuccessError({ status }) {
               </g>
               <g
                 transform="translate(27.746032, 27.698925)"
-                fill={color}
+                fill={'#6B6B6D'}
                 id="Path"
               >
                 <path d="M12.5315556,13.6140215 C12.5315556,13.6140215 10.4590476,7.0036129 0.991015873,7.11621505 L0.43247619,3.79294624 L10.8137143,0.415483871 L12.5315556,13.6140215 Z" />
@@ -53,7 +53,7 @@ function IconSuccessError({ status }) {
               fontWeight="500"
               fill="#FFFFFF"
             >
-              <tspan x="53" y="20">
+              <tspan x={status === 'success' ? '50' : '53'} y="20">
                 {status === 'success' && 'WINNER'}
                 {status === 'error' && 'ERROR'}
                 {status === 'draw' && 'DRAW'}
