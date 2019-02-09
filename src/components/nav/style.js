@@ -40,15 +40,123 @@ const StartWrapper = styled.div`
   letter-spacing: ${rem(0.4)};
   transform-origin: center;
   &:hover {
+    & .katana-1 {
+      transform: translate(${rem(100)}, ${rem(100)});
+      animation-duration: 0.3s;
+      animation-name: translate-katana-1;
+      animation-delay: 0.3s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    & .katana-2 {
+      transform: translate(${rem(-100)}, ${rem(100)});
+      animation-duration: 0.3s;
+      animation-name: translate-katana-2;
+      animation-delay: 0s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
     & .shield {
-      transform-origin: 42% 42%;
-      animation: rotate 2s ease-in-out forwards;
+      transform: translate(${rem(0)}, ${rem(-100)});
+      animation-duration: 0.3s;
+      animation-name: shield;
+      animation-delay: 0.6s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    & .logo-right-1 {
+      transform: translate(${rem(100)}, ${rem(0)});
+      animation-duration: 0.3s;
+      animation-name: logo-right-1;
+      animation-delay: 1s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    & .logo-right-2 {
+      transform: translate(${rem(100)}, ${rem(0)});
+      animation-duration: 0.3s;
+      animation-name: logo-right-2;
+      animation-delay: 1s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    & .logo-left-1 {
+      transform: translate(${rem(-100)}, ${rem(0)});
+      animation-duration: 0.3s;
+      animation-name: logo-left-1;
+      animation-delay: 1s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    & .logo-left-2 {
+      transform: translate(${rem(-100)}, ${rem(0)});
+      animation-duration: 0.3s;
+      animation-name: logo-left-2;
+      animation-delay: 1s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
+  @keyframes translate-katana-1 {
+    0% {
+      transform: translate(${rem(100)}, ${rem(100)});
+    }
+    100% {
+      transform: translate(${rem(0)}, ${rem(0)});
     }
   }
 
-  @keyframes rotate {
+  @keyframes translate-katana-2 {
+    0% {
+      transform: translate(${rem(-100)}, ${rem(100)});
+    }
     100% {
-      transform: rotate(360deg);
+      transform: translate(${rem(0)}, ${rem(0)});
+    }
+  }
+
+  @keyframes shield {
+    0% {
+      transform: translate(${rem(0)}, ${rem(-100)});
+    }
+    100% {
+      transform: translate(${rem(0)}, ${rem(0)});
+    }
+  }
+
+  @keyframes logo-right-1 {
+    0% {
+      transform: translate(${rem(100)}, ${rem(0)});
+    }
+    100% {
+      transform: translate(${rem(0)}, ${rem(7.5)});
+    }
+  }
+
+  @keyframes logo-right-2 {
+    0% {
+      transform: translate(${rem(100)}, ${rem(0)});
+    }
+    100% {
+      transform: translate(${rem(0)}, ${rem(0)});
+    }
+  }
+
+  @keyframes logo-left-1 {
+    0% {
+      transform: translate(${rem(-100)}, ${rem(0)});
+    }
+    100% {
+      transform: translate(${rem(0)}, ${rem(4)});
+    }
+  }
+
+  @keyframes logo-left-2 {
+    0% {
+      transform: translate(${rem(-100)}, ${rem(0)});
+    }
+    100% {
+      transform: translate(${rem(0)}, ${rem(11)});
     }
   }
 `

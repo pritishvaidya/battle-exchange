@@ -3,7 +3,7 @@ const proxy = require('http-proxy-middleware')
 module.exports = {
   siteMetadata: {
     title: `Battle Exchange`,
-    description: `A battle in between Stack Exchange Sites`,
+    description: `A Battle between Stack Exchange Sites`,
     author: `Pritish Vaidya`,
     siteUrl: `https://battleexchange.com`,
     siteImage: `https://i.imgur.com/0QFdZDm.png`,

@@ -39,6 +39,10 @@ function SEO({ description, lang, meta, keywords, title }) {
                 content: data.site.siteMetadata.siteImage,
               },
               {
+                property: `og:site_name`,
+                content: data.site.siteMetadata.title,
+              },
+              {
                 property: `og:url`,
                 content: data.site.siteMetadata.siteUrl,
               },
@@ -49,14 +53,6 @@ function SEO({ description, lang, meta, keywords, title }) {
               {
                 name: `twitter:creator`,
                 content: data.site.siteMetadata.author,
-              },
-              {
-                name: `twitter:title`,
-                content: title,
-              },
-              {
-                name: `twitter:description`,
-                content: metaDescription,
               },
             ]
               .concat(
@@ -98,6 +94,9 @@ const detailsQuery = graphql`
         title
         description
         author
+        siteUrl
+        siteImage
+        canonicalUrl
       }
     }
   }
