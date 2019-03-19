@@ -1,36 +1,125 @@
-import React from 'react'
-import { Redirect } from '@reach/router'
-import { Cookies, withCookies } from 'react-cookie'
+import React, { useEffect, useState } from 'react'
+import { Redirect, Location } from '@reach/router'
 import Highcharts from 'highcharts'
 import ReactHighcharts from 'react-highcharts'
-import PropTypes, { instanceOf } from 'prop-types'
+import PropTypes from 'prop-types'
+import queryString from 'query-string'
 
 import PlayerResult from './player-result'
+import LoadingOverlay from '../loading-overlay'
 
 import { PlayersWrapper, ResultsWrapper, ChartWrapper } from './style'
-import { CookieList, Graph, Routes } from '../../config'
+import { Graph, Routes, StackExchange } from '../../config'
+
+import FetchList from '../../utils/fetch-list'
+import SiteList from '../../utils/site-list'
 
 const categories = ['Reputation', 'Gold * 1000', 'Silver * 500', 'Bronze * 100']
 
-function Results({ player, cookies }) {
-  let result
-  const siteCookie = cookies.get(CookieList.default)
+function Results({ location }) {
+  const [loading, setLoading] = useState(true)
+  const [player1, setPlayer1] = useState(null)
+  const [player2, setPlayer2] = useState(null)
+  const playerResult = {}
+  let result = 'draw'
+  const params = queryString.parse(location.search)
 
-  if (!(player && siteCookie)) {
+  if (!params['id1'] || !params['id2'] || !params['site']) {
     return <Redirect to={Routes.Battle.site} noThrow />
   }
 
-  const playerResult = {}
+  async function fetchGraphData(id, playerStatus) {
+    const currentSite = SiteList.filter(
+      ({ api_site_parameter }) => api_site_parameter === params['site']
+    )
+    const name = currentSite.length && currentSite[0].name
+    setLoading(true)
+    const response = await fetch('/.netlify/functions/fetch-graph-data', {
+      method: 'POST',
+      body: JSON.stringify({ id, name }),
+    })
+    const reputationGraphData = await response.json()
+    if (reputationGraphData) {
+      if (playerStatus === 'player1') {
+        setPlayer1(prevState => ({ ...prevState, reputationGraphData }))
+      } else {
+        setPlayer2(prevState => ({ ...prevState, reputationGraphData }))
+      }
+    } else {
+      if (playerStatus === 'player1') {
+        setPlayer1(prevState => ({ ...prevState, reputationGraphData: [] }))
+      } else {
+        setPlayer2(prevState => ({ ...prevState, reputationGraphData: [] }))
+      }
+    }
+    setLoading(false)
+  }
+
+  async function fetchPlayerData(id, playerStatus) {
+    setLoading(true)
+    const data = await FetchList(`${StackExchange.User}/${id}`, {
+      site: params.site,
+      key: StackExchange.Key,
+    })
+    if (data && data.length) {
+      if (playerStatus === 'player1') {
+        setPlayer1({
+          ...player1,
+          reputation: data[0].reputation,
+          badges: data[0].badge_counts,
+          profile_image: data[0].profile_image,
+          display_name: data[0].display_name,
+        })
+      } else {
+        setPlayer2({
+          ...player2,
+          reputation: data[0].reputation,
+          badges: data[0].badge_counts,
+          profile_image: data[0].profile_image,
+          display_name: data[0].display_name,
+        })
+      }
+      fetchGraphData(data[0].account_id, playerStatus)
+    } else {
+      if (playerStatus === 'player1') {
+        setPlayer1(null)
+      } else {
+        setPlayer2(null)
+      }
+    }
+    setLoading(false)
+  }
+
+  /*eslint-disable*/
+  useEffect(
+    () => {
+      fetchPlayerData(params['id1'], 'player1')
+    },
+    [params['id1']]
+  )
+
+  useEffect(
+    () => {
+      fetchPlayerData(params['id2'], 'player2')
+    },
+    [params['id2']]
+  )
+  /*eslint-enable*/
+
+  if (loading || !(player1 && player2)) {
+    return <LoadingOverlay />
+  }
+
   playerResult['player1'] =
-    player['player1'].reputation +
-    player['player1'].badge_counts.gold * 1000 +
-    player['player1'].badge_counts.silver * 500 +
-    player['player1'].badge_counts.bronze * 100
+    player1.reputation +
+    player1.badges.gold * 1000 +
+    player1.badges.silver * 500 +
+    player1.badges.bronze * 100
   playerResult['player2'] =
-    player['player2'].reputation +
-    player['player2'].badge_counts.gold * 1000 +
-    player['player2'].badge_counts.silver * 500 +
-    player['player2'].badge_counts.bronze * 100
+    player2.reputation +
+    player2.badges.gold * 1000 +
+    player2.badges.silver * 500 +
+    player2.badges.bronze * 100
 
   if (playerResult['player1'] > playerResult['player2']) {
     result = 'player1'
@@ -46,18 +135,19 @@ function Results({ player, cookies }) {
         <PlayerResult
           type={'player1'}
           result={result}
-          cookie={siteCookie}
-          data={player['player1']}
+          cookie={params['site']}
+          data={player1}
         />
         <PlayerResult
           type={'player2'}
           result={result}
-          cookie={siteCookie}
-          data={player['player2']}
+          cookie={params['site']}
+          data={player2}
         />
       </PlayersWrapper>
       <ChartWrapper result>
         <ReactHighcharts
+          neverReflow={player1 && player2}
           config={{
             ...Graph,
             title: {
@@ -109,21 +199,25 @@ function Results({ player, cookies }) {
             series: [
               {
                 name: 'Player 1',
-                data: [
-                  -player['player1'].reputation,
-                  -player['player1'].badge_counts.gold * 1000,
-                  -player['player1'].badge_counts.silver * 500,
-                  -player['player1'].badge_counts.bronze * 100,
-                ],
+                data: player1
+                  ? [
+                      -player1.reputation,
+                      -player1.badges.gold * 1000,
+                      -player1.badges.silver * 500,
+                      -player1.badges.bronze * 100,
+                    ]
+                  : [],
               },
               {
                 name: 'Player 2',
-                data: [
-                  player['player2'].reputation,
-                  player['player2'].badge_counts.gold * 1000,
-                  player['player2'].badge_counts.silver * 500,
-                  player['player2'].badge_counts.bronze * 100,
-                ],
+                data: player2
+                  ? [
+                      player2.reputation,
+                      player2.badges.gold * 1000,
+                      player2.badges.silver * 500,
+                      player2.badges.bronze * 100,
+                    ]
+                  : [],
               },
             ],
           }}
@@ -144,26 +238,27 @@ function Results({ player, cookies }) {
                   : window.innerWidth / 1.5,
             },
             series: [
-              player['player1'].reputationGraphData
+              player1
                 ? {
-                    ...player['player1'].reputationGraphData,
+                    ...player1.reputationGraphData,
                     name: 'Player 1',
                     _colorIndex: null,
                   }
                 : { name: 'Player 1', data: [] },
-              player['player2'].reputationGraphData
+              player2
                 ? {
-                    ...player['player2'].reputationGraphData,
+                    ...player2.reputationGraphData,
                     name: 'Player 2',
                     _colorIndex: null,
                   }
-                : { name: 'Player 1', data: [] },
+                : { name: 'Player 2', data: [] },
             ],
           }}
         />
       </ChartWrapper>
       <ChartWrapper result>
         <ReactHighcharts
+          neverReflow={player1 && player2}
           config={{
             ...Graph,
             title: {
@@ -184,19 +279,23 @@ function Results({ player, cookies }) {
             series: [
               {
                 name: 'Player 1',
-                data: [
-                  player['player1'].badge_counts.gold,
-                  player['player1'].badge_counts.silver,
-                  player['player1'].badge_counts.bronze,
-                ],
+                data: player1
+                  ? [
+                      player1.badges.gold,
+                      player1.badges.silver,
+                      player1.badges.bronze,
+                    ]
+                  : [],
               },
               {
                 name: 'Player 2',
-                data: [
-                  player['player2'].badge_counts.gold,
-                  player['player2'].badge_counts.silver,
-                  player['player2'].badge_counts.bronze,
-                ],
+                data: player2
+                  ? [
+                      player2.badges.gold,
+                      player2.badges.silver,
+                      player2.badges.bronze,
+                    ]
+                  : [],
               },
             ],
           }}
@@ -206,9 +305,20 @@ function Results({ player, cookies }) {
   )
 }
 
-Results.propTypes = {
-  player: PropTypes.object.isRequired,
-  cookies: instanceOf(Cookies).isRequired,
+function ResultsLocation(props) {
+  return (
+    <Location>
+      {locationProps => <Results {...locationProps} {...props} />}
+    </Location>
+  )
 }
 
-export default withCookies(Results)
+Results.propTypes = {
+  location: PropTypes.object.isRequired,
+}
+
+ResultsLocation.propTypes = {
+  location: PropTypes.object.isRequired,
+}
+
+export default ResultsLocation

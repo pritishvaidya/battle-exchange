@@ -73,7 +73,11 @@ function Players({ cookies }) {
             <BattleButton
               player
               onClick={() =>
-                navigate(Routes.Battle.results, { state: { player } })
+                navigate(
+                  `${Routes.Battle.results}?id1=${
+                    player['player1'].user_id
+                  }&id2=${player['player2'].user_id}&site=${siteCookie}`
+                )
               }
             >
               Fight

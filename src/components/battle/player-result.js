@@ -20,7 +20,7 @@ import IconSuccessError from './icon-success-error'
 const PlayerResult = React.memo(function PlayerResult({
   cookie,
   data: {
-    badge_counts: { bronze, silver, gold },
+    badges: { bronze, silver, gold },
     profile_image,
     display_name,
     reputation,
